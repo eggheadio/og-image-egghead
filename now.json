@@ -1,0 +1,20 @@
+{
+    "name": "og-image-egghead",
+    "alias": [
+        "og-image-egghead.now.sh"
+    ],
+    "version": 2,
+    "regions": [
+        "all"
+    ],
+    "public": true,
+    "routes": [
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/(.+)",
+            "dest": "/api"
+        }
+    ]
+}
