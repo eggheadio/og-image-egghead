@@ -1,7 +1,7 @@
 {
-    "name": "og-image-egghead",
+    "name": "og-image-react-egghead",
     "alias": [
-        "og-image-egghead.now.sh"
+        "og-image-react-egghead.now.sh"
     ],
     "version": 2,
     "regions": [
