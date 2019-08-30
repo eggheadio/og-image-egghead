@@ -1,15 +1,12 @@
-import { parse } from "url"
+import {parse} from 'url'
 import compact from 'lodash/compact'
 
 export function parseRequest(req) {
+  console.log('parsing request', req.url)
 
-  console.log("parsing request", req.url)
-
-
-  const { pathname = "/", query = {} } = parse(req.url || "", true)
-  const { fontSize, images, widths, heights, theme, md } = query
+  const {pathname = '/', query = {}} = parse(req.url || '', true)
+  const {fontSize, images, widths, heights, theme, md} = query
   let [type, slug] = compact(pathname.split('/'))
-
 
   if (type && !slug) {
     slug = type
@@ -17,40 +14,37 @@ export function parseRequest(req) {
   }
 
   if (Array.isArray(fontSize)) {
-    throw new Error("Expected a single fontSize")
+    throw new Error('Expected a single fontSize')
   }
   if (Array.isArray(theme)) {
-    throw new Error("Expected a single theme")
+    throw new Error('Expected a single theme')
   }
 
-  const arr = slug.split(".")
+  const arr = slug.split('.')
 
-  let extension = ""
-  let text = ""
+  let extension = ''
+  let text = ''
   if (arr.length === 0) {
-    text = ""
+    text = ''
   } else if (arr.length === 1) {
     text = arr[0]
   } else {
     extension = arr.pop()
-    text = arr.join(".")
+    text = arr.join('.')
   }
   console.log(text, slug, type, extension)
   const parsedRequest = {
     resourceType: type,
-    fileType: extension === "jpeg" ? extension : "png",
+    fileType: extension === 'jpeg' ? extension : 'png',
     text: decodeURIComponent(text),
-    theme: theme === "dark" ? "dark" : "light",
-    md: md === "1" || md === "true",
-    fontSize: fontSize || "60px",
+    theme: theme === 'dark' ? 'dark' : 'light',
+    md: md === '1' || md === 'true',
+    fontSize: fontSize || '60px',
     images: getArray(images),
     widths: getArray(widths),
-    heights: getArray(heights)
+    heights: getArray(heights),
   }
-  parsedRequest.images = getDefaultImages(
-    parsedRequest.images,
-    parsedRequest.theme
-  )
+  parsedRequest.images = getDefaultImages(parsedRequest.images, parsedRequest.theme)
   return parsedRequest
 }
 
@@ -62,13 +56,11 @@ function getDefaultImages(images, theme) {
   if (
     images.length > 0 &&
     images[0] &&
-    images[0].startsWith(
-      "https://assets.zeit.co/image/upload/front/assets/design/"
-    )
+    images[0].startsWith('https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198085/og-image-assets')
   ) {
     return images
   }
-  return theme === "light"
-    ? ["https://assets.zeit.co/image/upload/front/assets/design/now-black.svg"]
-    : ["https://assets.zeit.co/image/upload/front/assets/design/now-white.svg"]
+  return theme === 'light'
+    ? ['https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg']
+    : ['https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg']
 }

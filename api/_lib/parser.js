@@ -14,11 +14,11 @@ var _url = require("url");
 var _compact3 = _interopRequireDefault(require("lodash/compact"));
 
 function parseRequest(req) {
-  console.log("parsing request", req.url);
+  console.log('parsing request', req.url);
 
-  var _parse = (0, _url.parse)(req.url || "", true),
+  var _parse = (0, _url.parse)(req.url || '', true),
       _parse$pathname = _parse.pathname,
-      pathname = _parse$pathname === void 0 ? "/" : _parse$pathname,
+      pathname = _parse$pathname === void 0 ? '/' : _parse$pathname,
       _parse$query = _parse.query,
       query = _parse$query === void 0 ? {} : _parse$query;
 
@@ -40,34 +40,34 @@ function parseRequest(req) {
   }
 
   if (Array.isArray(fontSize)) {
-    throw new Error("Expected a single fontSize");
+    throw new Error('Expected a single fontSize');
   }
 
   if (Array.isArray(theme)) {
-    throw new Error("Expected a single theme");
+    throw new Error('Expected a single theme');
   }
 
-  var arr = slug.split(".");
-  var extension = "";
-  var text = "";
+  var arr = slug.split('.');
+  var extension = '';
+  var text = '';
 
   if (arr.length === 0) {
-    text = "";
+    text = '';
   } else if (arr.length === 1) {
     text = arr[0];
   } else {
     extension = arr.pop();
-    text = arr.join(".");
+    text = arr.join('.');
   }
 
   console.log(text, slug, type, extension);
   var parsedRequest = {
     resourceType: type,
-    fileType: extension === "jpeg" ? extension : "png",
+    fileType: extension === 'jpeg' ? extension : 'png',
     text: decodeURIComponent(text),
-    theme: theme === "dark" ? "dark" : "light",
-    md: md === "1" || md === "true",
-    fontSize: fontSize || "60px",
+    theme: theme === 'dark' ? 'dark' : 'light',
+    md: md === '1' || md === 'true',
+    fontSize: fontSize || '60px',
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights)
@@ -81,9 +81,9 @@ function getArray(stringOrArray) {
 }
 
 function getDefaultImages(images, theme) {
-  if (images.length > 0 && images[0] && images[0].startsWith("https://assets.zeit.co/image/upload/front/assets/design/")) {
+  if (images.length > 0 && images[0] && images[0].startsWith('https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198085/og-image-assets')) {
     return images;
   }
 
-  return theme === "light" ? ["https://assets.zeit.co/image/upload/front/assets/design/now-black.svg"] : ["https://assets.zeit.co/image/upload/front/assets/design/now-white.svg"];
+  return theme === 'light' ? ['https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg'] : ['https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg'];
 }
