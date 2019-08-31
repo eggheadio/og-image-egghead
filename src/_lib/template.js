@@ -23,7 +23,7 @@ function InstructorGuide({parsedReq}) {
         flexDirection: 'column',
         fontFamily: 'Helvetica, Arial, Sans-Serif',
         height: '100%',
-        padding: '45px 30px 45px 30px',
+        padding: '30px 27px 25px 27px',
       }}
     >
       <div
