@@ -25,37 +25,44 @@ function InstructorGuide({parsedReq}) {
         height: '100%',
       }}
     >
-      <h1>egghead instructor guide</h1>
       <div
         css={{
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100%',
         }}
       >
         {images.map(image => {
           return (
             <img
               css={{
-                width: '450px',
+                width: '75px',
                 maxWidth: '100%',
-                maxHeight: '450px',
+                maxHeight: '75px',
               }}
               src={image}
               alt={text}
             />
           )
         })}
-        <div
+        <h1
           css={{
-            fontSize: '84px',
-            paddingLeft: '45px',
-            paddingRight: '25px',
+            paddingLeft: '15px',
           }}
         >
-          {text}
-        </div>
+          egghead instructor guide
+        </h1>
+      </div>
+      <div
+        css={{
+          fontSize: '84px',
+          paddingLeft: '45px',
+          paddingRight: '25px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
+        }}
+      >
+        {text}
       </div>
     </div>
   )
