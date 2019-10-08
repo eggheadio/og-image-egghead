@@ -121,7 +121,7 @@ function InstructorGuide({ parsedReq }) {
                 margin: 0
               }}
             >
-              Understand JavaScript's this Keyword in Depth
+              {text}
             </h2>
             <div
               css={{ marginTop: "30px", display: "flex", alignItems: "center" }}
