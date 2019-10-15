@@ -64,7 +64,7 @@ function InstructorGuide({ parsedReq }) {
           padding: "30px",
           height: "100%",
           backgroundImage:
-            "url('https://ucd971579456f81b56e88e13871a.previews.dropboxusercontent.com/p/thumb/AAnFEvfynsXk8578yFF2iyI6VErPqptjv_WwTmAlWhT1bGQ8-NLWMheev4T45lQlXovBw5lbq4QbmD9J2za_pZtwJvyRsJEEjBwJIa1ugWabQDJ9jYVVcT5Ysw2yf9e68dKQwSc53oWp23aisC-Fcif4Fp72cEFvavNOAta2ftKmpEJFkuLms629pfhm6TAfp5DUlkkL_1gVf0UspWUynnmWLpqwk6ilP8xqcKAn5Gwic5d_TzL6GLSfD06uoalTKTlPtxb7xlDpuC1z-ff3LQR48m7XbRHcUFrLcfOPgLg5M7-XbqI7R4dUlkMhNuZ2-q9yKIddHfhsYeJRCWb8Ls-FdQ6G14U62KbiUJ9oj52wC0IXk-vT7xmCDlRHITZqerC_Qk9Oovr1KkfVouz8s8KA/p.png')",
+            "url('https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571146625/og-image-assets/instructor-guide_2x.png')",
           backgroundSize: "contain"
         }}
       >
