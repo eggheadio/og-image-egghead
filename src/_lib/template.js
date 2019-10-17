@@ -90,7 +90,10 @@ function InstructorGuide({parsedReq}) {
             alignItems: 'center',
           }}>
           <img src={images[0]} width="70px" />
-          <h3 css={{marginLeft: 20}}>{resourceType.replace('-', ' ')}</h3>
+          <h3 css={{marginLeft: 20}}>
+            {/* {resourceType.replace('-', ' ')} */}
+            How to egghead
+          </h3>
         </div>
         <span
           css={{
