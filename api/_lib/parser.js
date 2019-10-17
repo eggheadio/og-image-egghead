@@ -28,7 +28,7 @@ function parseRequest(req) {
       heights = query.heights,
       theme = query.theme,
       md = query.md,
-      background = query.background;
+      bgImage = query.bgImage;
 
   var _compact = (0, _compact3["default"])(pathname.split('/')),
       _compact2 = (0, _slicedToArray2["default"])(_compact, 2),
@@ -69,7 +69,7 @@ function parseRequest(req) {
     theme: theme === 'dark' ? 'dark' : 'light',
     md: md === '1' || md === 'true',
     fontSize: fontSize || '60px',
-    background: background,
+    bgImage: bgImage,
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights)

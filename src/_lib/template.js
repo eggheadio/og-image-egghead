@@ -57,7 +57,7 @@ function InstructorGuide({parsedReq}) {
     md,
     fontSize,
     images,
-    background,
+    bgImage,
     widths,
     heights,
     resourceType,
@@ -75,9 +75,9 @@ function InstructorGuide({parsedReq}) {
           padding: '50px 80px',
           height: '100%',
           backgroundImage: `url(${
-            !isEmpty(background)
-              ? background
-              : 'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571146625/og-image-assets/instructor-guide_2x.png'
+            !isEmpty(bgImage)
+              ? bgImage
+              : 'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571300217/og-image-assets/instructor-guide_2x.png'
           })`,
           backgroundSize: 'contain',
         }}>

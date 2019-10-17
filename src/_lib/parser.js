@@ -5,7 +5,7 @@ export function parseRequest(req) {
   console.log('parsing request', req.url)
 
   const {pathname = '/', query = {}} = parse(req.url || '', true)
-  const {fontSize, images, widths, heights, theme, md, background} = query
+  const {fontSize, images, widths, heights, theme, md, bgImage} = query
   let [type, slug] = compact(pathname.split('/'))
 
   if (type && !slug) {
@@ -41,7 +41,7 @@ export function parseRequest(req) {
     theme: theme === 'dark' ? 'dark' : 'light',
     md: md === '1' || md === 'true',
     fontSize: fontSize || '60px',
-    background: background,
+    bgImage: bgImage,
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights),
