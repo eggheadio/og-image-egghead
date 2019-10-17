@@ -71,7 +71,7 @@ function InstructorGuide({parsedReq}) {
           display: 'flex',
           justifyContent: 'flex-start',
           alignItems: 'flex-end',
-          fontFamily: 'Helvetica, Arial, Sans-Serif',
+          fontFamily: 'Helvetica, Helvetica Neue, system-ui, Sans-Serif',
           padding: '50px 80px',
           height: '100%',
           backgroundImage: `url(${
@@ -102,10 +102,10 @@ function InstructorGuide({parsedReq}) {
             //backgroundColor: '#FF2D55',
             boxShadow: '32px 0 0 #242529, -32px 0 0 #242529',
             fontSize: '45px',
-            fontWeight: 600,
+            fontWeight: '500',
             lineHeight: 1.25,
             padding: '8px 0',
-            fontFamily: "'Lora', serif",
+            //fontFamily: 'Georgia, Palatino, Bookman, serif',
           }}>
           {text}
         </span>
