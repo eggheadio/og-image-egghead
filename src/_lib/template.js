@@ -103,7 +103,7 @@ function InstructorGuide({parsedReq}) {
             boxShadow: '32px 0 0 #242529, -32px 0 0 #242529',
             fontSize: '45px',
             fontWeight: 600,
-            lineHeight: 2.25,
+            lineHeight: 1.25,
             padding: '8px 0',
             fontFamily: "'Lora', serif",
           }}>
