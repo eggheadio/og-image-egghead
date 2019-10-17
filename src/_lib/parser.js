@@ -5,7 +5,7 @@ export function parseRequest(req) {
   console.log('parsing request', req.url)
 
   const {pathname = '/', query = {}} = parse(req.url || '', true)
-  const {fontSize, images, widths, heights, theme, md} = query
+  const {fontSize, images, widths, heights, theme, md, bgImage} = query
   let [type, slug] = compact(pathname.split('/'))
 
   if (type && !slug) {
@@ -24,6 +24,7 @@ export function parseRequest(req) {
 
   let extension = ''
   let text = ''
+
   if (arr.length === 0) {
     text = ''
   } else if (arr.length === 1) {
@@ -40,11 +41,15 @@ export function parseRequest(req) {
     theme: theme === 'dark' ? 'dark' : 'light',
     md: md === '1' || md === 'true',
     fontSize: fontSize || '60px',
+    bgImage: bgImage,
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights),
   }
-  parsedRequest.images = getDefaultImages(parsedRequest.images, parsedRequest.theme)
+  parsedRequest.images = getDefaultImages(
+    parsedRequest.images,
+    parsedRequest.theme
+  )
   return parsedRequest
 }
 
@@ -56,11 +61,17 @@ function getDefaultImages(images, theme) {
   if (
     images.length > 0 &&
     images[0] &&
-    images[0].startsWith('https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198085/og-image-assets')
+    images[0].startsWith(
+      'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198085/og-image-assets'
+    )
   ) {
     return images
   }
   return theme === 'light'
-    ? ['https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg']
-    : ['https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg']
+    ? [
+        'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg',
+      ]
+    : [
+        'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198446/og-image-assets/eggo.svg',
+      ]
 }
