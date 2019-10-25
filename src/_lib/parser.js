@@ -20,7 +20,7 @@ export function parseRequest(req) {
     throw new Error('Expected a single theme')
   }
 
-  const arr = slug.split('.')
+  const arr = slug.split(' ') // if something is broken, try changing this line to: const arr = slug.split('.')
 
   let extension = ''
   let text = ''

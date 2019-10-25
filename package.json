@@ -24,6 +24,7 @@
     "core-js": "3",
     "dotenv": "^8.0.0",
     "emotion": "^10.0.14",
+    "node-vibrant": "^3.1.4",
     "nodemon": "^1.19.1",
     "puppeteer-core": "^1.19.0",
     "react": "^16.8.6",

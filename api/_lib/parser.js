@@ -48,7 +48,8 @@ function parseRequest(req) {
     throw new Error('Expected a single theme');
   }
 
-  var arr = slug.split('.');
+  var arr = slug.split(' '); // if something is broken, try changing this line to: const arr = slug.split('.')
+
   var extension = '';
   var text = '';
 
