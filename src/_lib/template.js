@@ -18,6 +18,7 @@ const reset = css`
     padding: 0;
     margin: 0;
     color: #242529;
+    font-family: Arial, Helvetica, sans-serif;
   }
   html {
     text-rendering: optimizeLegibility;
@@ -61,7 +62,7 @@ function InstructorGuide({parsedReq}) {
     bgImage,
     widths,
     heights,
-    resourceType,
+    resourceType
   } = parsedReq
   console.log('PARSED REQUEST', parsedReq)
   return (
@@ -72,7 +73,7 @@ function InstructorGuide({parsedReq}) {
           display: 'flex',
           justifyContent: 'flex-start',
           alignItems: 'flex-end',
-          fontFamily: 'Helvetica, Helvetica Neue, system-ui, Sans-Serif',
+          //fontFamily: 'Inter, Helvetica, Helvetica Neue, system-ui, Sans-Serif',
           padding: '50px 80px',
           height: '100%',
           backgroundImage: `url(${
@@ -80,16 +81,18 @@ function InstructorGuide({parsedReq}) {
               ? bgImage
               : 'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571300217/og-image-assets/instructor-guide_2x.png'
           })`,
-          backgroundSize: 'contain',
-        }}>
+          backgroundSize: 'contain'
+        }}
+      >
         <div
           css={{
             position: 'absolute',
             left: 50,
             top: 50,
             display: 'flex',
-            alignItems: 'center',
-          }}>
+            alignItems: 'center'
+          }}
+        >
           <img src={images[0]} width="70px" />
           <h3 css={{marginLeft: 20}}>
             {/* {resourceType.replace('-', ' ')} */}
@@ -105,11 +108,90 @@ function InstructorGuide({parsedReq}) {
             fontSize: '48px',
             fontWeight: '600',
             lineHeight: 1.25,
-            padding: '8px 0',
+            padding: '8px 0'
             //fontFamily: 'Georgia, Palatino, Bookman, serif',
-          }}>
+          }}
+        >
           {text}
         </span>
+      </div>
+    </React.Fragment>
+  )
+}
+
+function Store({parsedReq}) {
+  const {
+    text,
+    theme,
+    md,
+    fontSize,
+    images,
+    bgImage,
+    widths,
+    heights,
+    resourceType
+  } = parsedReq
+  console.log('PARSED REQUEST', parsedReq)
+  return (
+    <React.Fragment>
+      <Global styles={reset} />
+      <div
+        css={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-end',
+          //fontFamily: 'Inter, Helvetica, Helvetica Neue, system-ui, Sans-Serif',
+          padding: '50px 80px',
+          height: '100%',
+          backgroundImage: `url(${
+            !isEmpty(bgImage)
+              ? bgImage
+              : 'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571300217/og-image-assets/instructor-guide_2x.png'
+          })`,
+          backgroundSize: '628px 628px',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: '50% 50%'
+        }}
+      >
+        <div
+          css={{
+            position: 'absolute',
+            left: 50,
+            top: 50,
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
+          <img src={images[0]} width="70px" />
+          <h3 css={{marginLeft: 20}}>
+            {/* {resourceType.replace('-', ' ')} */}
+            Store
+          </h3>
+        </div>
+        {/* <div
+          css={{
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        > */}
+        <h1
+          css={{
+            color: 'black',
+            backgroundColor: 'white',
+            //backgroundColor: '#FF2D55',
+            boxShadow: '32px 0 0 white, -32px 0 0 white',
+            fontSize: '48px',
+            fontWeight: '600',
+            lineHeight: 1.25,
+            padding: '10px 0'
+            //fontFamily: 'Georgia, Palatino, Bookman, serif',
+          }}
+        >
+          {text}
+        </h1>
+        {/* </div> */}
       </div>
     </React.Fragment>
   )
@@ -125,19 +207,21 @@ function Podcast({parsedReq, podcast, palette}) {
         css={{
           alignItems: 'center',
           display: 'flex',
-          fontFamily: 'Helvetica, Helvetica Neue, system-ui, Sans-Serif',
+          //fontFamily: 'Helvetica, Helvetica Neue, system-ui, Sans-Serif',
           height: '100%',
           justifyContent: 'space-between',
-          width: '100%',
-        }}>
+          width: '100%'
+        }}
+      >
         <div
           css={{
             alignItems: 'center',
             display: 'flex',
             left: 50,
             position: 'absolute',
-            top: 50,
-          }}>
+            top: 50
+          }}
+        >
           <img src={images[0]} width="70px" />
           <h3 css={{marginLeft: 20}}>
             {/* {resourceType.replace('-', ' ')} */}
@@ -150,8 +234,9 @@ function Podcast({parsedReq, podcast, palette}) {
             flexDirection: 'column',
             alignItems: 'space-between',
             paddingLeft: 50,
-            maxWidth: 600,
-          }}>
+            maxWidth: 600
+          }}
+        >
           <h1 css={{fontSize: 50}}>{podcast.title}</h1>
         </div>
 
@@ -167,11 +252,10 @@ function Podcast({parsedReq, podcast, palette}) {
           xmlns="http://www.w3.org/2000/svg"
           width="612"
           height="628"
-          viewBox="0 0 612 628">
+          viewBox="0 0 612 628"
+        >
           <path
-            fill={`rgb(${palette.DarkMuted._rgb[0]}, ${
-              palette.DarkMuted._rgb[1]
-            }, ${palette.DarkMuted._rgb[2]})`}
+            fill={`rgb(${palette.DarkMuted._rgb[0]}, ${palette.DarkMuted._rgb[1]}, ${palette.DarkMuted._rgb[2]})`}
             //fill={data.vibrant}
             //fill={!loading ? data.darkMuted : '#1C3338'}
             fillRule="evenodd"
@@ -191,6 +275,9 @@ export async function getHtml(parsedReq) {
   switch (parsedReq.resourceType) {
     case 'instructor-guide':
       markup = renderToStaticMarkup(<InstructorGuide parsedReq={parsedReq} />)
+      break
+    case 'store':
+      markup = renderToStaticMarkup(<Store parsedReq={parsedReq} />)
       break
     case 'podcast':
       const podcast = await axios
