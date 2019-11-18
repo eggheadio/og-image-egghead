@@ -199,7 +199,13 @@ function Store({parsedReq}) {
 
 function Podcast({parsedReq, podcast, palette}) {
   const {images} = parsedReq
-  console.log('PARSED REQUEST', parsedReq)
+  // console.log('PARSED REQUEST', parsedReq)
+  // const DarkMuted = `rgba(${palette.DarkMuted._rgb[0]}, ${palette.DarkMuted._rgb[1]}, ${palette.DarkMuted._rgb[2]}, 1)`
+  // const DarkMutedOpacity = `rgba(${palette.DarkMuted._rgb[0]}, ${palette.DarkMuted._rgb[1]}, ${palette.DarkMuted._rgb[2]}, .85)`
+  // const LightVibrant = `rgba(${palette.LightVibrant._rgb[0]}, ${palette.LightVibrant._rgb[1]}, ${palette.LightVibrant._rgb[2]}, 1)`
+  // const Vibrant = `rgba(${palette.Vibrant._rgb[0]}, ${palette.Vibrant._rgb[1]}, ${palette.Vibrant._rgb[2]}, 1)`
+  // const DarkVibrant = `rgba(${palette.DarkVibrant._rgb[0]}, ${palette.DarkVibrant._rgb[1]}, ${palette.DarkVibrant._rgb[2]}, .85)`
+
   return (
     <React.Fragment>
       <Global styles={reset} />
@@ -207,14 +213,31 @@ function Podcast({parsedReq, podcast, palette}) {
         css={{
           alignItems: 'center',
           display: 'flex',
-          //fontFamily: 'Helvetica, Helvetica Neue, system-ui, Sans-Serif',
-          height: '100%',
-          justifyContent: 'space-between',
-          width: '100%'
+          justifyContent: 'space-between'
         }}
       >
         <div
           css={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            zIndex: 0,
+            width: '1200px',
+            height: '628px',
+            backgroundImage: `url(${podcast.image_url})`,
+            boxShadow: `inset 0 0 0 1000px ${DarkMutedOpacity}`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '2000px',
+            backgroundPosition: '60% 50%',
+            filter: 'blur(35px)',
+            transform: 'scale(1.1)',
+            zoom: 1.2
+          }}
+        />
+        <div
+          css={{
+            position: 'relative',
+            zIndex: 5,
             alignItems: 'center',
             display: 'flex',
             left: 50,
@@ -222,47 +245,52 @@ function Podcast({parsedReq, podcast, palette}) {
             top: 50
           }}
         >
-          <img src={images[0]} width="70px" />
-          <h3 css={{marginLeft: 20}}>
+          <img src={images[0]} width="80px" />
+          <h2 css={{fontSize: 36, marginLeft: 20, color: 'white'}}>
             {/* {resourceType.replace('-', ' ')} */}
             Podcast
-          </h3>
+          </h2>
         </div>
         <div
           css={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'space-between',
+            alignItems: 'center',
+            justifyContent: 'flex-end',
             paddingLeft: 50,
-            maxWidth: 600
+            paddingBottom: 50,
+            height: 628,
+            maxWidth: 630,
+            zIndex: 10
+            //position: 'absolute',
           }}
         >
-          <h1 css={{fontSize: 50}}>{podcast.title}</h1>
+          <h1
+            css={{
+              fontWeight: 600,
+              fontSize: 56,
+              padding: '32px 10px',
+              color: 'white',
+              lineHeight: 1.2
+            }}
+          >
+            {podcast.title}
+          </h1>
         </div>
 
         <img
           src={podcast.image_url}
-          width="628px"
-          heigh="628px"
-          css={{clipPath: 'circle(240px at center)'}}
+          width="648px"
+          heigh="648px"
+          css={{
+            clipPath: 'circle(220px at center)',
+            zoom: 1.1,
+            position: 'absolute',
+            right: -20,
+            top: -40,
+            zIndex: 5
+          }}
         />
-
-        <svg
-          css={{position: 'absolute', right: 0, height: 627, zIndex: '-1'}}
-          xmlns="http://www.w3.org/2000/svg"
-          width="612"
-          height="628"
-          viewBox="0 0 612 628"
-        >
-          <path
-            fill={`rgb(${palette.DarkMuted._rgb[0]}, ${palette.DarkMuted._rgb[1]}, ${palette.DarkMuted._rgb[2]})`}
-            //fill={data.vibrant}
-            //fill={!loading ? data.darkMuted : '#1C3338'}
-            fillRule="evenodd"
-            d="M1200,-1.25055521e-12 L1200,628 L588,627.993089 C634.084302,540.045835 699.436953,482.974431 845.619395,384.902734 C1013.64399,272.177451 1036.00696,121.320442 1008.57836,-0.00722940765 L1200,-1.25055521e-12 Z"
-            transform="translate(-588)"
-          />
-        </svg>
       </div>
     </React.Fragment>
   )
