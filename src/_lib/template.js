@@ -201,7 +201,7 @@ function Podcast({parsedReq, podcast, palette}) {
   const {images} = parsedReq
   // console.log('PARSED REQUEST', parsedReq)
   // const DarkMuted = `rgba(${palette.DarkMuted._rgb[0]}, ${palette.DarkMuted._rgb[1]}, ${palette.DarkMuted._rgb[2]}, 1)`
-  // const DarkMutedOpacity = `rgba(${palette.DarkMuted._rgb[0]}, ${palette.DarkMuted._rgb[1]}, ${palette.DarkMuted._rgb[2]}, .85)`
+  const DarkMutedOpacity = `rgba(${palette.DarkMuted._rgb[0]}, ${palette.DarkMuted._rgb[1]}, ${palette.DarkMuted._rgb[2]}, .85)`
   // const LightVibrant = `rgba(${palette.LightVibrant._rgb[0]}, ${palette.LightVibrant._rgb[1]}, ${palette.LightVibrant._rgb[2]}, 1)`
   // const Vibrant = `rgba(${palette.Vibrant._rgb[0]}, ${palette.Vibrant._rgb[1]}, ${palette.Vibrant._rgb[2]}, 1)`
   // const DarkVibrant = `rgba(${palette.DarkVibrant._rgb[0]}, ${palette.DarkVibrant._rgb[1]}, ${palette.DarkVibrant._rgb[2]}, .85)`
