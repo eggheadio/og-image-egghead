@@ -5,6 +5,11 @@ import axios from 'axios'
 import {jsx, css, Global} from '@emotion/core'
 import {isEmpty} from 'lodash'
 import * as Vibrant from 'node-vibrant'
+import {readFileSync} from 'fs'
+
+const rglr = readFileSync(
+  `${__dirname}/../_fonts/Inter-Regular.woff2`
+).toString('base64')
 
 const reset = css`
   *,
@@ -18,7 +23,8 @@ const reset = css`
     padding: 0;
     margin: 0;
     color: #242529;
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: 'Inter', sans-serif; */
+    /* font-family: Helvetica, Arial, sans-serif; */
   }
   html {
     text-rendering: optimizeLegibility;
