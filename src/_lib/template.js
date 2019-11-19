@@ -5,11 +5,6 @@ import axios from 'axios'
 import {jsx, css, Global} from '@emotion/core'
 import {isEmpty} from 'lodash'
 import * as Vibrant from 'node-vibrant'
-import {readFileSync} from 'fs'
-
-const rglr = readFileSync(
-  `${__dirname}/../_fonts/Inter-Regular.woff2`
-).toString('base64')
 
 const reset = css`
   *,
