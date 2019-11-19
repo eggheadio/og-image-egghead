@@ -19,7 +19,7 @@ const reset = css`
     margin: 0;
     color: #242529;
     /* font-family: 'Inter', sans-serif; */
-    /* font-family: Helvetica, Arial, sans-serif; */
+    font-family: Helvetica, Arial, sans-serif;
   }
   html {
     text-rendering: optimizeLegibility;
@@ -114,6 +114,7 @@ function InstructorGuide({parsedReq}) {
           }}
         >
           {text}
+          {/* emojis: {emojify(sanitizeHtml(text))} */}
         </span>
       </div>
     </React.Fragment>

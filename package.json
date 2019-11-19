@@ -32,7 +32,8 @@
     "puppeteer-core": "^1.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-textfit": "^1.1.0"
+    "react-textfit": "^1.1.0",
+    "twemoji": "^12.1.4"
   },
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",
