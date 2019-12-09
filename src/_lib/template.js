@@ -264,7 +264,7 @@ function Podcast({parsedReq, podcast, palette}) {
             <img src={images[0]} width="60px" />
             <h2 css={{fontSize: 34, marginLeft: 14, color: 'rgba(0,0,0,0.8)'}}>
               {/* {resourceType.replace('-', ' ')} */}
-              egghead.io<span css={{color: vibrant}}>/podcast</span>
+              egghead.io<span css={{color: vibrant}}>/podcasts</span>
             </h2>
           </div>
           <h1
