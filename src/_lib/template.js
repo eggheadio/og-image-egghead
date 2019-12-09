@@ -1,12 +1,15 @@
 /** @jsx jsx */
 import React from 'react'
+import {readFileSync} from 'fs'
 import {renderToStaticMarkup} from 'react-dom/server'
 import axios from 'axios'
 import {jsx, css, Global} from '@emotion/core'
 import {isEmpty} from 'lodash'
 import * as Vibrant from 'node-vibrant'
+import fonts from './fonts'
 
 const reset = css`
+  ${fonts}
   *,
   *:before,
   *:after {
@@ -18,8 +21,8 @@ const reset = css`
     padding: 0;
     margin: 0;
     color: #242529;
-    /* font-family: 'Inter', sans-serif; */
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   html {
     text-rendering: optimizeLegibility;
@@ -63,7 +66,7 @@ function InstructorGuide({parsedReq}) {
     bgImage,
     widths,
     heights,
-    resourceType
+    resourceType,
   } = parsedReq
   console.log('PARSED REQUEST', parsedReq)
   return (
@@ -82,7 +85,7 @@ function InstructorGuide({parsedReq}) {
               ? bgImage
               : 'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571300217/og-image-assets/instructor-guide_2x.png'
           })`,
-          backgroundSize: 'contain'
+          backgroundSize: 'contain',
         }}
       >
         <div
@@ -91,7 +94,7 @@ function InstructorGuide({parsedReq}) {
             left: 50,
             top: 50,
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
           }}
         >
           <img src={images[0]} width="70px" />
@@ -109,7 +112,7 @@ function InstructorGuide({parsedReq}) {
             fontSize: '48px',
             fontWeight: '600',
             lineHeight: 1.25,
-            padding: '8px 0'
+            padding: '8px 0',
             //fontFamily: 'Georgia, Palatino, Bookman, serif',
           }}
         >
@@ -131,7 +134,7 @@ function Store({parsedReq}) {
     bgImage,
     widths,
     heights,
-    resourceType
+    resourceType,
   } = parsedReq
   console.log('PARSED REQUEST', parsedReq)
   return (
@@ -152,7 +155,7 @@ function Store({parsedReq}) {
           })`,
           backgroundSize: '628px 628px',
           backgroundRepeat: 'no-repeat',
-          backgroundPosition: '50% 50%'
+          backgroundPosition: '50% 50%',
         }}
       >
         <div
@@ -161,7 +164,7 @@ function Store({parsedReq}) {
             left: 50,
             top: 50,
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
           }}
         >
           <img src={images[0]} width="70px" />
@@ -187,7 +190,7 @@ function Store({parsedReq}) {
             fontSize: '48px',
             fontWeight: '600',
             lineHeight: 1.25,
-            padding: '10px 0'
+            padding: '10px 0',
             //fontFamily: 'Georgia, Palatino, Bookman, serif',
           }}
         >
@@ -215,7 +218,7 @@ function Podcast({parsedReq, podcast, palette}) {
         css={{
           alignItems: 'center',
           display: 'flex',
-          justifyContent: 'space-between'
+          justifyContent: 'space-between',
         }}
       >
         <div
@@ -233,7 +236,7 @@ function Podcast({parsedReq, podcast, palette}) {
             backgroundPosition: '60% 50%',
             filter: 'blur(35px)',
             transform: 'scale(1.1)',
-            zoom: 1.2
+            zoom: 1.2,
           }}
         />
         <div
@@ -244,7 +247,7 @@ function Podcast({parsedReq, podcast, palette}) {
             display: 'flex',
             left: 50,
             position: 'absolute',
-            top: 50
+            top: 50,
           }}
         >
           <img src={images[0]} width="80px" />
@@ -263,7 +266,7 @@ function Podcast({parsedReq, podcast, palette}) {
             paddingBottom: 50,
             height: 628,
             maxWidth: 630,
-            zIndex: 10
+            zIndex: 10,
             //position: 'absolute',
           }}
         >
@@ -273,7 +276,7 @@ function Podcast({parsedReq, podcast, palette}) {
               fontSize: 56,
               padding: '32px 10px',
               color: 'white',
-              lineHeight: 1.2
+              lineHeight: 1.2,
             }}
           >
             {podcast.title}
@@ -290,7 +293,7 @@ function Podcast({parsedReq, podcast, palette}) {
             position: 'absolute',
             right: -20,
             top: -40,
-            zIndex: 5
+            zIndex: 5,
           }}
         />
       </div>
