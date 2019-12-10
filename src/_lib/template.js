@@ -277,6 +277,7 @@ function Podcast({parsedReq, podcast, palette}) {
 
 function Lesson({lesson, parsedReq, palette}) {
   const vibrant = `rgba(${palette.Vibrant._rgb.toString()}, 1)`
+  const darkVibrant = `rgba(${palette.DarkVibrant._rgb.toString()}, 1)`
   const {images} = parsedReq
   return (
     <React.Fragment>
@@ -294,28 +295,17 @@ function Lesson({lesson, parsedReq, palette}) {
           borderTop: `25px solid ${vibrant}`,
         }}
       >
-        <div css={{marginRight: 50}}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="171"
-            height="171"
-            viewBox="0 0 171 171"
-          >
-            <g fill="none" fill-rule="evenodd" transform="translate(4 4)">
-              <circle
-                cx="81.881"
-                cy="81.881"
-                r="81.881"
-                fill={vibrant}
-                stroke="#FFF"
-                stroke-width="6.141"
-              />
-              <path
-                fill="#F7FCF6"
-                d="M66.1300136,49.0612545 L113.633556,79.2907813 C115.064251,80.2012238 115.485999,82.0990911 114.575557,83.5297866 C114.334277,83.9089403 114.012709,84.2305081 113.633556,84.4717877 L66.1300136,114.701315 C64.6993182,115.611757 62.8014509,115.190009 61.8910083,113.759313 C61.5774896,113.266641 61.4109634,112.69478 61.4109634,112.110811 L61.4109634,51.6517577 C61.4109634,49.9559408 62.7856946,48.5812096 64.4815115,48.5812096 C65.0654807,48.5812096 65.6373413,48.7477357 66.1300136,49.0612545 Z"
-              />
-            </g>
-          </svg>
+        <div css={{marginRight: 50, width: '100%', maxWidth: 170}}>
+          <img
+            // tag image
+            src={lesson.image_256_url}
+            css={{
+              borderRadius: 10,
+              width: '100%',
+              maxWidth: 150,
+              // marginRight: 30,
+            }}
+          />
         </div>
         <div
           // right column holder
@@ -369,16 +359,34 @@ function Lesson({lesson, parsedReq, palette}) {
               },
             }}
           >
-            <img
-              // tag image
-              src={lesson.image_256_url}
-              css={{
-                borderRadius: 10,
-                width: '100%',
-                maxWidth: 80,
-                marginRight: 30,
-              }}
-            />
+            {/*  <svg
+              // play button
+              css={{marginRight: 36}}
+              xmlns="http://www.w3.org/2000/svg"
+              width="84"
+              height="84"
+              viewBox="0 0 84 84"
+            >
+              <g fill="none" fill-rule="evenodd" transform="translate(2 2)">
+                <circle
+                  cx="39.942"
+                  cy="39.942"
+                  r="39.942"
+                  fill={vibrant}
+                  stroke="#FFF"
+                  stroke-width="2.996"
+                />
+                <path
+                  fill={
+                    lesson.primary_tag.name === 'javascript'
+                      ? darkVibrant
+                      : '#F7FCF6'
+                  }
+                  d="M32.2585432,23.9323193 L55.4310028,38.6784299 C56.128903,39.1225482 56.3346339,40.0483371 55.8905155,40.7462373 C55.7728181,40.9311904 55.6159558,41.0880527 55.4310028,41.2057501 L32.2585432,55.9518607 C31.560643,56.3959791 30.6348541,56.1902482 30.1907358,55.492348 C30.0377998,55.25202 29.9565675,54.9730636 29.9565675,54.6882006 L29.9565675,25.1959794 C29.9565675,24.3687516 30.6271681,23.698151 31.4543959,23.698151 C31.7392589,23.698151 32.0182153,23.7793833 32.2585432,23.9323193 Z"
+                />
+              </g>
+            </svg> */}
+
             <div
               // instructor
               css={{marginRight: 36, display: 'flex', alignItems: 'center'}}
