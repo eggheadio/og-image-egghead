@@ -277,6 +277,7 @@ function Podcast({parsedReq, podcast, palette}) {
 
 function Lesson({lesson, parsedReq, palette}) {
   const vibrant = `rgba(${palette.Vibrant._rgb.toString()}, 1)`
+  const {images} = parsedReq
   return (
     <React.Fragment>
       <Global styles={reset} />
@@ -290,7 +291,7 @@ function Lesson({lesson, parsedReq, palette}) {
           // textAlign: 'center',
           width: '100%',
           height: '100%',
-          borderLeft: `25px solid ${vibrant}`,
+          borderTop: `25px solid ${vibrant}`,
         }}
       >
         <div css={{marginRight: 50}}>
@@ -319,27 +320,38 @@ function Lesson({lesson, parsedReq, palette}) {
         <div
           // right column holder
           css={{
-            // display: 'grid',
-            // gridTemplateRows: 'auto 1fr',
-            // gridGap: 30,
             display: 'flex',
             flexDirection: 'column',
             height: '100%',
             justifyContent: 'center',
           }}
         >
-          <img
-            // tag image
-            src={lesson.image_256_url}
-            css={{borderRadius: 10, width: '100%', maxWidth: 104}}
-          />
+          <div
+            css={{
+              marginBottom: 30,
+              display: 'flex',
+              alignItems: 'center',
+              fontSize: 36,
+              fontWeight: 600,
+            }}
+          >
+            <img src={images[0]} width="72px" css={{marginRight: 15}} />{' '}
+            egghead.io
+          </div>
           <h1
             // title
             css={{
-              fontSize: lesson.title.length > 30 ? 50 : 58,
+              fontSize:
+                lesson.title.length > 30
+                  ? lesson.title.length > 45
+                    ? lesson.title.length > 55
+                      ? 52
+                      : 56
+                    : 62
+                  : 66,
               lineHeight: 1.3,
               padding: 0,
-              margin: '30px 0',
+              marginBottom: 30,
             }}
           >
             {lesson.title}
@@ -350,20 +362,34 @@ function Lesson({lesson, parsedReq, palette}) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-start',
-              fontSize: 32,
+              fontSize: 36,
+              flexWrap: 'wrap',
+              div: {
+                padding: '15px 0',
+              },
             }}
           >
+            <img
+              // tag image
+              src={lesson.image_256_url}
+              css={{
+                borderRadius: 10,
+                width: '100%',
+                maxWidth: 80,
+                marginRight: 30,
+              }}
+            />
             <div
               // instructor
-              css={{marginRight: 30, display: 'flex', alignItems: 'center'}}
+              css={{marginRight: 36, display: 'flex', alignItems: 'center'}}
             >
               <img
                 src={lesson.instructor.avatar_64_url}
                 css={{
                   borderRadius: '50%',
-                  width: 64,
-                  height: 64,
-                  marginRight: 10,
+                  width: 72,
+                  height: 72,
+                  marginRight: 15,
                 }}
               />{' '}
               {lesson.instructor.full_name}
@@ -371,7 +397,7 @@ function Lesson({lesson, parsedReq, palette}) {
             {lesson.free_forever && (
               <div
                 // community resource
-                css={{marginRight: 30, display: 'flex', alignItems: 'center'}}
+                css={{marginRight: 36, display: 'flex', alignItems: 'center'}}
               >
                 <svg
                   css={{marginRight: 10}}
@@ -395,13 +421,13 @@ function Lesson({lesson, parsedReq, palette}) {
               <svg
                 css={{marginRight: 10}}
                 xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
+                width="36"
+                height="36"
+                viewBox="0 0 36 36"
               >
                 <path
                   fill="#A1A7BC"
-                  d="M15,0 C6.71572875,0 0,6.71572875 0,15 C0,23.2842712 6.71572875,30 15,30 C23.2842712,30 30,23.2842712 30,15 C30,11.0217527 28.4196474,7.20644396 25.6066017,4.39339828 C22.793556,1.58035261 18.9782473,0 15,0 Z M15,27 C8.372583,27 3,21.627417 3,15 C3,8.372583 8.372583,3 15,3 C21.627417,3 27,8.372583 27,15 C27,18.1825979 25.7357179,21.2348448 23.4852814,23.4852814 C21.2348448,25.7357179 18.1825979,27 15,27 Z M19.65,15.945 L16.5,14.13 L16.5,7.5 C16.5,6.67157288 15.8284271,6 15,6 C14.1715729,6 13.5,6.67157288 13.5,7.5 L13.5,15.18 C13.5088817,15.283353 13.5342001,15.3846265 13.575,15.48 C13.6058909,15.5689958 13.646115,15.654472 13.695,15.735 C13.7360463,15.8202593 13.786349,15.9007436 13.845,15.975 L14.085,16.17 L14.22,16.305 L18.12,18.555 C18.3486044,18.6845707 18.6072354,18.7518147 18.87,18.7500371 C19.5530894,18.7547759 20.1531318,18.2974189 20.329582,17.6374952 C20.5060321,16.9775715 20.214319,16.2817772 19.62,15.945 L19.65,15.945 Z"
+                  d="M18,0 C8.0588745,0 0,8.0588745 0,18 C0,27.9411255 8.0588745,36 18,36 C27.9411255,36 36,27.9411255 36,18 C36,13.2261032 34.1035769,8.64773275 30.7279221,5.27207794 C27.3522672,1.89642313 22.7738968,0 18,0 Z M18,32.4 C10.0470996,32.4 3.6,25.9529004 3.6,18 C3.6,10.0470996 10.0470996,3.6 18,3.6 C25.9529004,3.6 32.4,10.0470996 32.4,18 C32.4,21.8191175 30.8828615,25.4818138 28.1823376,28.1823376 C25.4818138,30.8828615 21.8191175,32.4 18,32.4 Z M23.58,19.134 L19.8,16.956 L19.8,9 C19.8,8.00588745 18.9941125,7.2 18,7.2 C17.0058875,7.2 16.2,8.00588745 16.2,9 L16.2,18.216 C16.2106581,18.3400236 16.2410401,18.4615518 16.29,18.576 C16.3270691,18.682795 16.375338,18.7853664 16.434,18.882 C16.4832556,18.9843112 16.5436188,19.0808923 16.614,19.17 L16.902,19.404 L17.064,19.566 L21.744,22.266 C22.0183252,22.4214848 22.3286825,22.5021777 22.644,22.5000445 C23.4637073,22.505731 24.1837581,21.9569026 24.3954984,21.1649942 C24.6072386,20.3730858 24.2571828,19.5381326 23.544,19.134 L23.58,19.134 Z"
                 />
               </svg>{' '}
               {convertTime(lesson.duration)}

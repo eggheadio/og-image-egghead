@@ -13,5 +13,5 @@ function convertTimeTo(timeInSeconds) {
     return "".concat(hours, "h ").concat(mins, "m");
   } else if (mins > 0) {
     return "".concat(mins, "m");
-  }
+  } else return "less than a minute";
 }

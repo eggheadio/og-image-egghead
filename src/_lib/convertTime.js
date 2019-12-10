@@ -7,5 +7,5 @@ export default function convertTimeTo(timeInSeconds) {
     return `${hours}h ${mins}m`
   } else if (mins > 0) {
     return `${mins}m`
-  }
+  } else return `less than a minute`
 }
