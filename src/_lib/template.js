@@ -77,7 +77,6 @@ function InstructorGuide({parsedReq}) {
           display: 'flex',
           justifyContent: 'flex-start',
           alignItems: 'flex-end',
-          //fontFamily: 'Inter, Helvetica, Helvetica Neue, system-ui, Sans-Serif',
           padding: '50px 80px',
           height: '100%',
           backgroundImage: `url(${
@@ -107,13 +106,11 @@ function InstructorGuide({parsedReq}) {
           css={{
             color: 'white',
             backgroundColor: '#242529',
-            //backgroundColor: '#FF2D55',
             boxShadow: '32px 0 0 #242529, -32px 0 0 #242529',
             fontSize: '48px',
             fontWeight: '600',
             lineHeight: 1.25,
             padding: '8px 0',
-            //fontFamily: 'Georgia, Palatino, Bookman, serif',
           }}
         >
           {text}
@@ -286,10 +283,7 @@ function Lesson({lesson, parsedReq, palette}) {
         css={{
           padding: 50,
           display: 'flex',
-          // flexDirection: 'column',
           alignItems: 'center',
-          // justifyContent: 'center',
-          // textAlign: 'center',
           width: '100%',
           height: '100%',
           borderTop: `25px solid ${vibrant}`,
@@ -303,7 +297,6 @@ function Lesson({lesson, parsedReq, palette}) {
               borderRadius: 10,
               width: '100%',
               maxWidth: 150,
-              // marginRight: 30,
             }}
           />
         </div>
@@ -344,7 +337,7 @@ function Lesson({lesson, parsedReq, palette}) {
               marginBottom: 30,
             }}
           >
-            {lesson.title}
+            {lesson.title.replace('’', `'`)}
           </h1>
           <div
             // byline holder
