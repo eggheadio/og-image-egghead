@@ -7,6 +7,10 @@ import {isEmpty} from 'lodash'
 import * as Vibrant from 'node-vibrant'
 import fonts from './fonts'
 import convertTime from './convertTime'
+import twemoji from 'twemoji'
+
+const twOptions = {folder: 'svg', ext: '.svg'}
+const emojify = text => twemoji.parse(text, twOptions)
 
 const reset = css`
   ${fonts}
@@ -393,7 +397,7 @@ function Lesson({lesson, parsedReq, palette}) {
                   marginRight: 15,
                 }}
               />{' '}
-              {lesson.instructor.full_name}
+              {emojify(lesson.instructor.full_name.replace('Ł', `L`))}
             </div>
             {lesson.free_forever && (
               <div
@@ -460,17 +464,17 @@ export async function getHtml(parsedReq) {
         .then(palette => palette)
       console.log(palette)
       markup = renderToStaticMarkup(
-        <Podcast podcast={podcast} palette={palette} parsedReq={parsedReq} />
+        <Podcast podcast={podcast} palette={palette} parsedReq={parsedReq} />,
       )
       break
     case 'series':
       const resource = await axios
         .get(
-          `https://egghead.io/api/v1/${parsedReq.resourceType}/${parsedReq.text}`
+          `https://egghead.io/api/v1/${parsedReq.resourceType}/${parsedReq.text}`,
         )
         .then(({data}) => data)
       markup = renderToStaticMarkup(
-        <App resource={resource} parsedReq={parsedReq} />
+        <App resource={resource} parsedReq={parsedReq} />,
       )
       break
     case 'lesson':
@@ -481,12 +485,12 @@ export async function getHtml(parsedReq) {
         .getPalette()
         .then(palette => palette)
       markup = renderToStaticMarkup(
-        <Lesson lesson={lesson} palette={tagPalette} parsedReq={parsedReq} />
+        <Lesson lesson={lesson} palette={tagPalette} parsedReq={parsedReq} />,
       )
       break
     default:
       markup = renderToStaticMarkup(
-        <App resource={resource} parsedReq={parsedReq} />
+        <App resource={resource} parsedReq={parsedReq} />,
       )
   }
   console.log(markup)

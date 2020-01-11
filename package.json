@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": "8.10.x"
+    "node": "8.16.x"
   },
   "dependencies": {
     "@babel/cli": "^7.5.5",
@@ -20,7 +20,7 @@
     "@emotion/core": "^10.0.16",
     "axios": "^0.19.0",
     "babel-plugin-emotion": "^10.0.16",
-    "chrome-aws-lambda": "^1.19.0",
+    "chrome-aws-lambda": "^2.0.2",
     "core-js": "2",
     "dotenv": "^8.0.0",
     "emotion": "^10.0.14",
@@ -29,7 +29,7 @@
     "nodemon": "^1.19.1",
     "now": "^16.5.2",
     "now-cli": "^0.0.0",
-    "puppeteer-core": "^1.19.0",
+    "puppeteer-core": "^2.0.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-textfit": "^1.1.0",
