@@ -349,7 +349,7 @@ function Lesson({lesson, parsedReq, palette}) {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-start',
-              fontSize: 36,
+              fontSize: 32,
               flexWrap: 'wrap',
               div: {
                 padding: '15px 0',
@@ -392,8 +392,8 @@ function Lesson({lesson, parsedReq, palette}) {
                 src={lesson.instructor.avatar_64_url}
                 css={{
                   borderRadius: '50%',
-                  width: 72,
-                  height: 72,
+                  width: 70,
+                  height: 70,
                   marginRight: 15,
                 }}
               />{' '}
@@ -464,17 +464,17 @@ export async function getHtml(parsedReq) {
         .then(palette => palette)
       console.log(palette)
       markup = renderToStaticMarkup(
-        <Podcast podcast={podcast} palette={palette} parsedReq={parsedReq} />,
+        <Podcast podcast={podcast} palette={palette} parsedReq={parsedReq} />
       )
       break
     case 'series':
       const resource = await axios
         .get(
-          `https://egghead.io/api/v1/${parsedReq.resourceType}/${parsedReq.text}`,
+          `https://egghead.io/api/v1/${parsedReq.resourceType}/${parsedReq.text}`
         )
         .then(({data}) => data)
       markup = renderToStaticMarkup(
-        <App resource={resource} parsedReq={parsedReq} />,
+        <App resource={resource} parsedReq={parsedReq} />
       )
       break
     case 'lesson':
@@ -485,12 +485,12 @@ export async function getHtml(parsedReq) {
         .getPalette()
         .then(palette => palette)
       markup = renderToStaticMarkup(
-        <Lesson lesson={lesson} palette={tagPalette} parsedReq={parsedReq} />,
+        <Lesson lesson={lesson} palette={tagPalette} parsedReq={parsedReq} />
       )
       break
     default:
       markup = renderToStaticMarkup(
-        <App resource={resource} parsedReq={parsedReq} />,
+        <App resource={resource} parsedReq={parsedReq} />
       )
   }
   console.log(markup)
