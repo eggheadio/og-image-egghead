@@ -3,7 +3,7 @@ import React from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
 import axios from 'axios'
 import {jsx, css, Global} from '@emotion/core'
-import {isEmpty} from 'lodash'
+import {isEmpty, map, uniqBy} from 'lodash'
 import * as Vibrant from 'node-vibrant'
 import fonts from './fonts'
 import convertTime from './convertTime'
@@ -444,6 +444,135 @@ function Lesson({lesson, parsedReq, palette}) {
   )
 }
 
+function Instructor({parsedReq, instructor, palette}) {
+  const {images} = parsedReq
+  const vibrant = `rgba(${palette.Vibrant._rgb.toString()}, 1)`
+  const uniqTags = map(uniqBy(instructor.lesson_tags, 'label'), tag => {
+    return tag.image_url
+  })
+  const hasPublishedCourse = instructor.published_courses !== 0
+  const TechLogos = ({limit = 5}) => {
+    if (!isEmpty(uniqTags))
+      return (
+        <div
+          css={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingTop: 60,
+          }}
+        >
+          {uniqTags.slice(0, limit).map(tag => (
+            <img key={tag} src={tag} width="50px" css={{margin: '0 20px'}} />
+          ))}
+        </div>
+      )
+    else return null
+  }
+
+  return (
+    <React.Fragment>
+      <Global styles={reset} />
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+          borderTop: `25px solid ${vibrant}`,
+        }}
+      >
+        <div
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: 50,
+            width: '100%',
+            maxWidth: 620,
+          }}
+        >
+          <div
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <img src={images[0]} width="60px" />
+            <h2 css={{fontSize: 34, marginLeft: 14, color: 'rgba(0,0,0,0.8)'}}>
+              {/* {resourceType.replace('-', ' ')} */}
+              egghead.io <span css={{color: vibrant}}>instructor</span>
+            </h2>
+          </div>
+          <h1
+            css={{
+              fontWeight: 700,
+              fontSize: 58,
+              padding: '56px 0',
+              color: 'rgba(0, 0, 0, 0.9)',
+              lineHeight: 1.2,
+            }}
+          >
+            {emojify(instructor.full_name.replace('Ł', `L`))}
+          </h1>
+          <div
+            css={{
+              display: 'grid',
+              width: '100%',
+              gridTemplateColumns:
+                instructor.published_lessons !== 0 &&
+                instructor.published_courses !== 0
+                  ? '1fr 1fr'
+                  : '1fr',
+            }}
+          >
+            {instructor.published_lessons && (
+              <div
+                css={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                <h2 css={{fontSize: 48}}>{instructor.published_lessons}</h2>
+                <h3 css={{opacity: 0.7}}>
+                  {instructor.published_lessons > 1 ? 'lessons' : 'lesson'}
+                </h3>
+              </div>
+            )}
+            {hasPublishedCourse && (
+              <div
+                css={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
+                }}
+              >
+                <h2 css={{fontSize: 48}}>{instructor.published_courses}</h2>
+                <h3 css={{opacity: 0.7}}>
+                  {instructor.published_courses > 1 ? 'courses' : 'course'}
+                </h3>
+              </div>
+            )}
+          </div>
+          <TechLogos />
+        </div>
+        <img
+          src={instructor.avatar_256_url}
+          width="620px"
+          heigh="620px"
+          css={{marginRight: 60, borderRadius: 20}}
+        />
+      </div>
+    </React.Fragment>
+  )
+}
+
 export async function getHtml(parsedReq) {
   let markup
 
@@ -465,6 +594,22 @@ export async function getHtml(parsedReq) {
       console.log(palette)
       markup = renderToStaticMarkup(
         <Podcast podcast={podcast} palette={palette} parsedReq={parsedReq} />
+      )
+      break
+    case 'instructor':
+      const instructor = await axios
+        .get(`https://egghead.io/api/v1/instructors/${parsedReq.text}`)
+        .then(({data}) => data)
+      const avatarPalette = await Vibrant.from(instructor.avatar_256_url)
+        .getPalette()
+        .then(palette => palette)
+      console.log(palette)
+      markup = renderToStaticMarkup(
+        <Instructor
+          instructor={instructor}
+          palette={avatarPalette}
+          parsedReq={parsedReq}
+        />
       )
       break
     case 'series':
@@ -493,6 +638,6 @@ export async function getHtml(parsedReq) {
         <App resource={resource} parsedReq={parsedReq} />
       )
   }
-  console.log(markup)
+  // console.log(markup)
   return markup
 }
