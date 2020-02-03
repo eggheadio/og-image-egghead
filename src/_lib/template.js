@@ -514,7 +514,7 @@ function Instructor({parsedReq, instructor, palette}) {
               lineHeight: 1.2,
             }}
           >
-            {emojify(instructor.full_name.replace('Ł', `L`))}
+            {emojify(instructor.full_name.replace('Ł', 'L'))}
           </h1>
           <div
             css={{
@@ -573,6 +573,154 @@ function Instructor({parsedReq, instructor, palette}) {
   )
 }
 
+function Playlists({parsedReq, playlist}) {
+  const {images} = parsedReq
+
+  return (
+    <React.Fragment>
+      <Global styles={reset} />
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          height: '100%',
+        }}
+      >
+        <div
+          css={{
+            width: '100%',
+            maxWidth: 460,
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+            position: 'relative',
+            overflow: 'hidden',
+            backgroundColor: 'black',
+          }}
+        >
+          <div
+            css={{
+              transform: 'rotateZ(15deg)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              position: 'relative',
+              margin: '-110px 0 0 -60px',
+              zoom: 1.45,
+              opacity: 0.9,
+            }}
+          >
+            {playlist.items.slice(0, 3).map(lesson => (
+              <img src={lesson.thumb_nail} width="460" key={lesson.id} />
+            ))}
+          </div>
+          <div
+            css={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="95"
+              height="95"
+              viewBox="0 0 95 95"
+            >
+              <g fill="none" fillRule="evenodd">
+                <circle
+                  cx="47.32"
+                  cy="47.32"
+                  r="46.32"
+                  fill="#FFF"
+                  stroke="#051721"
+                  strokeWidth="2"
+                />
+                <path
+                  fill="#252526"
+                  fillRule="nonzero"
+                  d="M40.0400015,60.361356 C40.0400015,61.764363 40.9808178,62.2925569 42.1559215,61.5316904 L59.1811153,50.5080682 C60.3497057,49.7514191 60.356219,48.5288657 59.1811153,47.7679992 L42.1559215,36.7443771 C40.9873312,35.987728 40.0400015,36.5221136 40.0400015,37.9147114 L40.0400015,60.361356 Z"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div
+          css={{
+            display: 'flex',
+            flexDirection: 'column',
+            // alignItems: 'center',
+            padding: 75,
+            width: '100%',
+          }}
+        >
+          <div
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <img src={images[0]} width="60px" />
+            <h2 css={{fontSize: 34, marginLeft: 14, color: 'rgba(0,0,0,0.8)'}}>
+              egghead.io
+            </h2>
+          </div>
+
+          <h1
+            css={{
+              fontWeight: 700,
+              padding: '56px 0',
+              color: 'rgba(0, 0, 0, 0.9)',
+              lineHeight: 1.2,
+              // fonSize: 58,
+              fontSize:
+                playlist.title.length > 30
+                  ? playlist.title.length > 45
+                    ? playlist.title.length > 55
+                      ? 48
+                      : 52
+                    : 56
+                  : 60,
+            }}
+          >
+            {emojify(playlist.title)}
+          </h1>
+          <h3
+            css={{
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              margin: '0 auto',
+              textAlign: 'center',
+            }}
+          >
+            Collection by{' '}
+            <span css={{display: 'flex', alignItems: 'center'}}>
+              <img
+                src={playlist.owner.avatar_url}
+                css={{borderRadius: '50%', margin: '0 16px'}}
+                width="56"
+              />
+              {playlist.owner.full_name.replace('Ł', 'L')}
+            </span>
+          </h3>
+          <h3 css={{display: 'flex', alignItems: 'center', marginTop: '1rem'}}>
+            {playlist.items.length} video lessons,{' '}
+            {convertTime(playlist.duration)}
+          </h3>
+        </div>
+      </div>
+    </React.Fragment>
+  )
+}
+
 export async function getHtml(parsedReq) {
   let markup
 
@@ -610,6 +758,15 @@ export async function getHtml(parsedReq) {
           palette={avatarPalette}
           parsedReq={parsedReq}
         />
+      )
+      break
+    case 'playlists':
+      const playlist = await axios
+        .get(`https://egghead.io/api/v1/playlists/${parsedReq.text}`)
+        .then(({data}) => data)
+      console.log('playlist: ', playlist)
+      markup = renderToStaticMarkup(
+        <Playlists playlist={playlist} parsedReq={parsedReq} />
       )
       break
     case 'series':
