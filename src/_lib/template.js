@@ -703,11 +703,17 @@ function Playlists({parsedReq, playlist}) {
           >
             Collection by{' '}
             <span css={{display: 'flex', alignItems: 'center'}}>
-              <img
-                src={playlist.owner.avatar_url}
-                css={{borderRadius: '50%', margin: '0 16px'}}
-                width="56"
-              />
+              {playlist.owner.avatar_url && (
+                <img
+                  src={
+                    playlist.owner.avatar_url.includes('gravatar')
+                      ? playlist.owner.avatar_url.replace('//', 'https://')
+                      : playlist.owner.avatar_url
+                  }
+                  css={{borderRadius: '50%', margin: '0 16px'}}
+                  width="56"
+                />
+              )}
               {playlist.owner.full_name.replace('Ł', 'L')}
             </span>
           </h3>
