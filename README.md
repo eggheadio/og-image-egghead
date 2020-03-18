@@ -9,20 +9,21 @@
 
 ## Examples
 
-Instructor (https://og-image-react-egghead.now.sh/instructor/john-lindquist)
-![https://og-image-react-egghead.now.sh/instructor/john-lindquist](https://og-image-react-egghead.now.sh/instructor/john-lindquist)
+### Instructor
+<a href="https://og-image-react-egghead.now.sh/instructor/john-lindquist"><img src="https://og-image-react-egghead.now.sh/instructor/john-lindquist" width="350"></a>
 
-Lesson (https://og-image-react-egghead.now.sh/lesson/aws-wtf-is-aws-lambda)
-![https://og-image-react-egghead.now.sh/lesson/aws-wtf-is-aws-lambda](https://og-image-react-egghead.now.sh/lesson/aws-wtf-is-aws-lambda)
+### Lesson
+<a href="https://og-image-react-egghead.now.sh/lesson/aws-wtf-is-aws-lambda"><img src="https://og-image-react-egghead.now.sh/lesson/aws-wtf-is-aws-lambda" width="350"></a>
 
-Podcast (https://og-image-react-egghead.now.sh/podcast/get-comfortable-learning-on-your-own-with-khalal-walker)
-![https://og-image-react-egghead.now.sh/podcast/get-comfortable-learning-on-your-own-with-khalal-walker](https://og-image-react-egghead.now.sh/podcast/get-comfortable-learning-on-your-own-with-khalal-walker)
+### Podcast
+<a href="https://og-image-react-egghead.now.sh/podcast/get-comfortable-learning-on-your-own-with-khalal-walker"><img src="https://og-image-react-egghead.now.sh/podcast/get-comfortable-learning-on-your-own-with-khalal-walker" width="350"></a>
 
-Collection (https://og-image-react-egghead.now.sh/playlists/migrate-a-wordpress-site-to-the-jamstack-using-gatsby-6d7f)
-![https://og-image-react-egghead.now.sh/playlists/migrate-a-wordpress-site-to-the-jamstack-using-gatsby-6d7f](https://og-image-react-egghead.now.sh/playlists/migrate-a-wordpress-site-to-the-jamstack-using-gatsby-6d7f)
+### Collection
+<a href="https://og-image-react-egghead.now.sh/playlists/migrate-a-wordpress-site-to-the-jamstack-using-gatsby-6d7f"><img src="https://og-image-react-egghead.now.sh/playlists/migrate-a-wordpress-site-to-the-jamstack-using-gatsby-6d7f" width="350"></a>
 
-store.egghead.io (https://og-image-react-egghead.now.sh/store/egghead%20tee?bgImage=https://store.egghead.io/static/4292de66e2f27b5cafcc2ebb068a5a73/257f4/Men_s_Egghead_Shirt.jpg)
-![https://og-image-react-egghead.now.sh/store/egghead%20tee?bgImage=https://store.egghead.io/static/4292de66e2f27b5cafcc2ebb068a5a73/257f4/Men_s_Egghead_Shirt.jpg](https://og-image-react-egghead.now.sh/store/egghead%20tee?bgImage=https://store.egghead.io/static/4292de66e2f27b5cafcc2ebb068a5a73/257f4/Men_s_Egghead_Shirt.jpg)
+### store.egghead.io
+<a href="https://og-image-react-egghead.now.sh/store/egghead%20tee?bgImage=https://store.egghead.io/static/4292de66e2f27b5cafcc2ebb068a5a73/257f4/Men_s_Egghead_Shirt.jpg"><img src="https://og-image-react-egghead.now.sh/store/egghead%20tee?bgImage=https://store.egghead.io/static/4292de66e2f27b5cafcc2ebb068a5a73/257f4/Men_s_Egghead_Shirt.jpg" width="350">
+</a>
 
-howtoegghead.com (https://og-image-react-egghead.now.sh/instructor-guide/egghead%20instructor%20guide?bgImage=https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571260698/og-image-assets/share_image_screencasting.png)
-![https://og-image-react-egghead.now.sh/instructor-guide/egghead%20instructor%20guide?bgImage=https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571260698/og-image-assets/share_image_screencasting.png](https://og-image-react-egghead.now.sh/instructor-guide/egghead%20instructor%20guide?bgImage=https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571260698/og-image-assets/share_image_screencasting.png)
+### howtoegghead.com
+<a href="https://og-image-react-egghead.now.sh/instructor-guide/egghead%20instructor%20guide?bgImage=https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571260698/og-image-assets/share_image_screencasting.png"><img src="https://og-image-react-egghead.now.sh/instructor-guide/egghead%20instructor%20guide?bgImage=https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571260698/og-image-assets/share_image_screencasting.png" width="350"></a>
