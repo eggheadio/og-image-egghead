@@ -101,10 +101,7 @@ function InstructorGuide({parsedReq}) {
           }}
         >
           <img src={images[0]} width="70px" />
-          <h3 css={{marginLeft: 20}}>
-            {/* {resourceType.replace('-', ' ')} */}
-            How to egghead
-          </h3>
+          <h3 css={{marginLeft: 20}}>How to egghead</h3>
         </div>
         <span
           css={{
@@ -117,8 +114,7 @@ function InstructorGuide({parsedReq}) {
             padding: '8px 0',
           }}
         >
-          {text}
-          {/* emojis: {emojify(sanitizeHtml(text))} */}
+          {emojify(text.replace('Ł', `L`))}
         </span>
       </div>
     </React.Fragment>
@@ -146,7 +142,6 @@ function Store({parsedReq}) {
           display: 'flex',
           justifyContent: 'flex-start',
           alignItems: 'flex-end',
-          //fontFamily: 'Inter, Helvetica, Helvetica Neue, system-ui, Sans-Serif',
           padding: '50px 80px',
           height: '100%',
           backgroundImage: `url(${
@@ -174,30 +169,19 @@ function Store({parsedReq}) {
             Store
           </h3>
         </div>
-        {/* <div
-          css={{
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        > */}
         <h1
           css={{
             color: 'black',
             backgroundColor: 'white',
-            //backgroundColor: '#FF2D55',
             boxShadow: '32px 0 0 white, -32px 0 0 white',
             fontSize: '48px',
             fontWeight: '600',
             lineHeight: 1.25,
             padding: '10px 0',
-            //fontFamily: 'Georgia, Palatino, Bookman, serif',
           }}
         >
           {text}
         </h1>
-        {/* </div> */}
       </div>
     </React.Fragment>
   )
@@ -225,10 +209,8 @@ function Podcast({parsedReq, podcast, palette}) {
             display: 'flex',
             flexDirection: 'column',
             padding: 50,
-            // height: 628,
             width: '100%',
             maxWidth: 640,
-            // position: 'absolute',
           }}
         >
           <div
@@ -239,7 +221,6 @@ function Podcast({parsedReq, podcast, palette}) {
           >
             <img src={images[0]} width="60px" />
             <h2 css={{fontSize: 34, marginLeft: 14, color: 'rgba(0,0,0,0.8)'}}>
-              {/* {resourceType.replace('-', ' ')} */}
               egghead.io<span css={{color: vibrant}}>/podcasts</span>
             </h2>
           </div>
