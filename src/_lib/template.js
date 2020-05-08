@@ -10,7 +10,7 @@ import convertTime from './convertTime'
 import twemoji from 'twemoji'
 
 const twOptions = {folder: 'svg', ext: '.svg'}
-const emojify = text => twemoji.parse(text, twOptions)
+const emojify = (text) => twemoji.parse(text, twOptions)
 
 const reset = css`
   ${fonts}
@@ -233,7 +233,7 @@ function Podcast({parsedReq, podcast, palette}) {
               lineHeight: 1.2,
             }}
           >
-            {podcast.title}
+            {emojify(podcast.title.replace('Ł', `L`))}
           </h1>
         </div>
 
@@ -428,7 +428,7 @@ function Lesson({lesson, parsedReq, palette}) {
 function Instructor({parsedReq, instructor, palette}) {
   const {images} = parsedReq
   const vibrant = `rgba(${palette.Vibrant._rgb.toString()}, 1)`
-  const uniqTags = map(uniqBy(instructor.lesson_tags, 'label'), tag => {
+  const uniqTags = map(uniqBy(instructor.lesson_tags, 'label'), (tag) => {
     return tag.image_url
   })
   const hasPublishedCourse = instructor.published_courses !== 0
@@ -443,7 +443,7 @@ function Instructor({parsedReq, instructor, palette}) {
             paddingTop: 60,
           }}
         >
-          {uniqTags.slice(0, limit).map(tag => (
+          {uniqTags.slice(0, limit).map((tag) => (
             <img key={tag} src={tag} width="50px" css={{margin: '0 20px'}} />
           ))}
         </div>
@@ -595,7 +595,7 @@ function Playlists({parsedReq, playlist}) {
               opacity: 0.9,
             }}
           >
-            {playlist.items.slice(0, 3).map(lesson => (
+            {playlist.items.slice(0, 3).map((lesson) => (
               <img src={lesson.thumb_nail} width="460" key={lesson.id} />
             ))}
           </div>
@@ -725,7 +725,7 @@ export async function getHtml(parsedReq) {
         .then(({data}) => data)
       const palette = await Vibrant.from(podcast.image_url)
         .getPalette()
-        .then(palette => palette)
+        .then((palette) => palette)
       console.log(palette)
       markup = renderToStaticMarkup(
         <Podcast podcast={podcast} palette={palette} parsedReq={parsedReq} />
@@ -737,7 +737,7 @@ export async function getHtml(parsedReq) {
         .then(({data}) => data)
       const avatarPalette = await Vibrant.from(instructor.avatar_256_url)
         .getPalette()
-        .then(palette => palette)
+        .then((palette) => palette)
       console.log(palette)
       markup = renderToStaticMarkup(
         <Instructor
@@ -772,7 +772,7 @@ export async function getHtml(parsedReq) {
         .then(({data}) => data)
       const tagPalette = await Vibrant.from(lesson.image_256_url)
         .getPalette()
-        .then(palette => palette)
+        .then((palette) => palette)
       markup = renderToStaticMarkup(
         <Lesson lesson={lesson} palette={tagPalette} parsedReq={parsedReq} />
       )
