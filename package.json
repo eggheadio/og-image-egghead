@@ -20,7 +20,7 @@
     "@emotion/core": "^10.0.27",
     "axios": "^0.19.1",
     "babel-plugin-emotion": "^10.0.27",
-    "chrome-aws-lambda": "^2.0.2",
+    "chrome-aws-lambda": "^2.1.1",
     "core-js": "3.6.3",
     "dotenv": "^8.2.0",
     "emotion": "^10.0.27",
@@ -29,11 +29,11 @@
     "nodemon": "^2.0.2",
     "now": "^16.7.3",
     "now-cli": "^0.0.0",
-    "puppeteer-core": "^2.0.0",
+    "puppeteer-core": "^2.1.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-textfit": "^1.1.0",
-    "twemoji": "^12.1.4"
+    "twemoji": "^12.1.6"
   },
   "scripts": {
     "start": "nodemon --exec babel-node src/index.js",

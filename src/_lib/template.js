@@ -103,19 +103,21 @@ function InstructorGuide({parsedReq}) {
           <img src={images[0]} width="70px" />
           <h3 css={{marginLeft: 20}}>How to egghead</h3>
         </div>
-        <span
-          css={{
-            color: 'white',
-            backgroundColor: '#242529',
-            boxShadow: '32px 0 0 #242529, -32px 0 0 #242529',
-            fontSize: '48px',
-            fontWeight: '600',
-            lineHeight: 1.25,
-            padding: '8px 0',
-          }}
-        >
-          {emojify(text.replace('Ł', `L`))}
-        </span>
+        <div css={{width: '100%'}}>
+          <span
+            css={{
+              color: 'white',
+              backgroundColor: '#242529',
+              boxShadow: '24px 0 0 #242529, -24px 0 0 #242529',
+              fontSize: '46px',
+              fontWeight: '600',
+              lineHeight: 1.25,
+              padding: '12px 0',
+            }}
+          >
+            {emojify(text.replace('Ł', `L`))}
+          </span>
+        </div>
       </div>
     </React.Fragment>
   )

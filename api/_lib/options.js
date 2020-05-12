@@ -20,9 +20,7 @@ function getOptions(_x) {
 }
 
 function _getOptions() {
-  _getOptions = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee(isDev) {
+  _getOptions = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(isDev) {
     var options;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {

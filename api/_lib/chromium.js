@@ -22,9 +22,7 @@ function getPage(_x) {
 }
 
 function _getPage() {
-  _getPage = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee(isDev) {
+  _getPage = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(isDev) {
     var options, browser;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
@@ -70,9 +68,7 @@ function getScreenshot(_x2, _x3, _x4) {
 }
 
 function _getScreenshot() {
-  _getScreenshot = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee2(url, type, isDev) {
+  _getScreenshot = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(url, type, isDev) {
     var page, file;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {

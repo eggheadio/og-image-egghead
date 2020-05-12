@@ -27,9 +27,7 @@ function handler(_x, _x2) {
 }
 
 function _handler() {
-  _handler = (0, _asyncToGenerator2["default"])(
-  /*#__PURE__*/
-  _regenerator["default"].mark(function _callee(req, res) {
+  _handler = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
     var parsedReq, text, fileType, resourceType, html, filePath, fileUrl, file;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
