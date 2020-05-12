@@ -103,7 +103,7 @@ function InstructorGuide({parsedReq}) {
           <img src={images[0]} width="70px" />
           <h3 css={{marginLeft: 20}}>How to egghead</h3>
         </div>
-        <div css={{width: '100%'}}>
+        <div css={{width: '100%', maxWidth: 700}}>
           <span
             css={{
               color: 'white',
