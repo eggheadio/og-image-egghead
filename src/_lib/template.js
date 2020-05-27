@@ -103,7 +103,7 @@ function InstructorGuide({parsedReq}) {
           <img src={images[0]} width="70px" />
           <h3 css={{marginLeft: 20}}>How to egghead</h3>
         </div>
-        <div css={{width: '100%', maxWidth: 700}}>
+        <div css={{width: '100%', maxWidth: 660}}>
           <span
             css={{
               color: 'white',
@@ -111,7 +111,7 @@ function InstructorGuide({parsedReq}) {
               boxShadow: '24px 0 0 #242529, -24px 0 0 #242529',
               fontSize: '46px',
               fontWeight: '600',
-              lineHeight: 1.25,
+              lineHeight: 1.5,
               padding: '12px 0',
             }}
           >
