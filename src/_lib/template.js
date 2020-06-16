@@ -324,7 +324,7 @@ function Lesson({lesson, parsedReq, palette}) {
               marginBottom: 30,
             }}
           >
-            {lesson.title.replace(`’`, `'`)}
+            {lesson.title.replace(`’`, `'`).replace(`ó`, `o`).replace(`á`, `a`)}
           </h1>
           <div
             // byline holder
@@ -339,34 +339,6 @@ function Lesson({lesson, parsedReq, palette}) {
               },
             }}
           >
-            {/*  <svg
-              // play button
-              css={{marginRight: 36}}
-              xmlns="http://www.w3.org/2000/svg"
-              width="84"
-              height="84"
-              viewBox="0 0 84 84"
-            >
-              <g fill="none" fill-rule="evenodd" transform="translate(2 2)">
-                <circle
-                  cx="39.942"
-                  cy="39.942"
-                  r="39.942"
-                  fill={vibrant}
-                  stroke="#FFF"
-                  stroke-width="2.996"
-                />
-                <path
-                  fill={
-                    lesson.primary_tag.name === 'javascript'
-                      ? darkVibrant
-                      : '#F7FCF6'
-                  }
-                  d="M32.2585432,23.9323193 L55.4310028,38.6784299 C56.128903,39.1225482 56.3346339,40.0483371 55.8905155,40.7462373 C55.7728181,40.9311904 55.6159558,41.0880527 55.4310028,41.2057501 L32.2585432,55.9518607 C31.560643,56.3959791 30.6348541,56.1902482 30.1907358,55.492348 C30.0377998,55.25202 29.9565675,54.9730636 29.9565675,54.6882006 L29.9565675,25.1959794 C29.9565675,24.3687516 30.6271681,23.698151 31.4543959,23.698151 C31.7392589,23.698151 32.0182153,23.7793833 32.2585432,23.9323193 Z"
-                />
-              </g>
-            </svg> */}
-
             <div
               // instructor
               css={{marginRight: 36, display: 'flex', alignItems: 'center'}}
