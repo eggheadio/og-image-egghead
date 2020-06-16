@@ -13,7 +13,7 @@ const twOptions = {folder: 'svg', ext: '.svg'}
 const emojify = (text) => twemoji.parse(text, twOptions)
 
 const reset = css`
-  /* ${fonts} */
+  ${fonts}
   *,
   *:before,
   *:after {
