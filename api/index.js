@@ -43,46 +43,48 @@ function _handler() {
             html = _context.sent;
 
             if (!isHtmlDebug) {
-              _context.next = 10;
+              _context.next = 11;
               break;
             }
 
-            res.setHeader('Content-Type', 'text/html');
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.setHeader('Accept-Charset', 'utf-8');
             res.end(html);
             return _context.abrupt("return");
 
-          case 10:
-            _context.next = 12;
+          case 11:
+            _context.next = 13;
             return (0, _file.writeTempFile)(text, html);
 
-          case 12:
+          case 13:
             filePath = _context.sent;
             fileUrl = (0, _file.pathToFileURL)(filePath);
-            _context.next = 16;
+            _context.next = 17;
             return (0, _chromium.getScreenshot)(fileUrl, fileType, isDev);
 
-          case 16:
+          case 17:
             file = _context.sent;
             res.statusCode = 200;
             res.setHeader('Content-Type', "image/".concat(fileType));
             res.setHeader('Cache-Control', "public, immutable, no-transform, s-maxage=31536000, max-age=31536000");
             res.end(file);
-            _context.next = 28;
+            _context.next = 30;
             break;
 
-          case 23:
-            _context.prev = 23;
+          case 24:
+            _context.prev = 24;
             _context.t0 = _context["catch"](0);
             res.statusCode = 200;
-            res.setHeader('Content-Type', 'text/html');
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.setHeader('Accept-Charset', 'utf-8');
             res.end(_context.t0.stack);
 
-          case 28:
+          case 30:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 23]]);
+    }, _callee, null, [[0, 24]]);
   }));
   return _handler.apply(this, arguments);
 }

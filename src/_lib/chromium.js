@@ -1,5 +1,5 @@
-import puppeteer from "puppeteer-core"
-import { getOptions } from "./options"
+import puppeteer from 'puppeteer-core'
+import {getOptions} from './options'
 let _page
 
 async function getPage(isDev) {
@@ -12,14 +12,11 @@ async function getPage(isDev) {
   return _page
 }
 
-export async function getScreenshot(
-  url,
-  type,
-  isDev
-) {
+export async function getScreenshot(url, type, isDev) {
   const page = await getPage(isDev)
-  await page.setViewport({ width: 1200, height: 628 })
-  await page.goto(url)
-  const file = await page.screenshot({ type })
+  await page.setViewport({width: 1200, height: 628})
+  const response = await page.goto(url)
+  await page.setContent((await response.buffer()).toString('utf8'))
+  const file = await page.screenshot({type})
   return file
 }

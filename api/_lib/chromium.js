@@ -69,7 +69,7 @@ function getScreenshot(_x2, _x3, _x4) {
 
 function _getScreenshot() {
   _getScreenshot = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(url, type, isDev) {
-    var page, file;
+    var page, response, file;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
@@ -90,16 +90,27 @@ function _getScreenshot() {
             return page["goto"](url);
 
           case 7:
-            _context2.next = 9;
+            response = _context2.sent;
+            _context2.t0 = page;
+            _context2.next = 11;
+            return response.buffer();
+
+          case 11:
+            _context2.t1 = _context2.sent.toString('utf8');
+            _context2.next = 14;
+            return _context2.t0.setContent.call(_context2.t0, _context2.t1);
+
+          case 14:
+            _context2.next = 16;
             return page.screenshot({
               type: type
             });
 
-          case 9:
+          case 16:
             file = _context2.sent;
             return _context2.abrupt("return", file);
 
-          case 11:
+          case 18:
           case "end":
             return _context2.stop();
         }

@@ -13,7 +13,7 @@ const twOptions = {folder: 'svg', ext: '.svg'}
 const emojify = (text) => twemoji.parse(text, twOptions)
 
 const reset = css`
-  ${fonts}
+  /* ${fonts} */
   *,
   *:before,
   *:after {
@@ -115,7 +115,7 @@ function InstructorGuide({parsedReq}) {
               padding: '12px 0',
             }}
           >
-            {emojify(text.replace('Ł', `L`))}
+            {emojify(text)}
           </span>
         </div>
       </div>
@@ -166,10 +166,7 @@ function Store({parsedReq}) {
           }}
         >
           <img src={images[0]} width='70px' />
-          <h3 css={{marginLeft: 20}}>
-            {/* {resourceType.replace('-', ' ')} */}
-            Store
-          </h3>
+          <h3 css={{marginLeft: 20}}>Store</h3>
         </div>
         <h1
           css={{
@@ -235,7 +232,7 @@ function Podcast({parsedReq, podcast, palette}) {
               lineHeight: 1.2,
             }}
           >
-            {emojify(podcast.title.replace('Ł', `L`))}
+            {emojify(podcast.title)}
           </h1>
         </div>
 
@@ -324,7 +321,7 @@ function Lesson({lesson, parsedReq, palette}) {
               marginBottom: 30,
             }}
           >
-            {lesson.title.replace(`’`, `'`).replace(`ó`, `o`).replace(`á`, `a`)}
+            {lesson.title.replace(`’`, `'`)}
           </h1>
           <div
             // byline holder
@@ -352,9 +349,7 @@ function Lesson({lesson, parsedReq, palette}) {
                   marginRight: 15,
                 }}
               />{' '}
-              {emojify(
-                lesson.instructor.full_name.replace('Ł', `L`).replace(`á`, `a`)
-              )}
+              {emojify(lesson.instructor.full_name)}
             </div>
             <div
               // duration
@@ -458,7 +453,6 @@ function Instructor({parsedReq, instructor, palette}) {
           >
             <img src={images[0]} width='60px' />
             <h2 css={{fontSize: 34, marginLeft: 14, color: 'rgba(0,0,0,0.8)'}}>
-              {/* {resourceType.replace('-', ' ')} */}
               egghead.io <span css={{color: vibrant}}>instructor</span>
             </h2>
           </div>
@@ -471,7 +465,7 @@ function Instructor({parsedReq, instructor, palette}) {
               lineHeight: 1.2,
             }}
           >
-            {emojify(instructor.full_name.replace('Ł', 'L'))}
+            {emojify(instructor.full_name)}
           </h1>
           <div
             css={{
@@ -671,7 +665,7 @@ function Playlists({parsedReq, playlist}) {
                   width='56'
                 />
               )}
-              {playlist.owner.full_name.replace('Ł', 'L')}
+              {playlist.owner.full_name}
             </span>
           </h3>
           <h3 css={{display: 'flex', alignItems: 'center', marginTop: '1rem'}}>
