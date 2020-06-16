@@ -273,14 +273,14 @@ function Lesson({lesson, parsedReq, palette}) {
           borderTop: `25px solid ${vibrant}`,
         }}
       >
-        <div css={{marginRight: 50, width: '100%', maxWidth: 170}}>
+        <div css={{marginRight: 50, width: '100%', maxWidth: 130}}>
           <img
             // tag image
             src={lesson.image_256_url}
             css={{
               borderRadius: 10,
               width: '100%',
-              maxWidth: 150,
+              maxWidth: 130,
             }}
           />
         </div>
