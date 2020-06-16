@@ -14,6 +14,7 @@ const emojify = (text) => twemoji.parse(text, twOptions)
 
 const reset = css`
   ${fonts}
+
   *,
   *:before,
   *:after {
