@@ -531,7 +531,7 @@ function Instructor({ parsedReq, instructor, palette }) {
   )
 }
 
-function Playlists({ parsedReq, playlist }) {
+function Playlists({ parsedReq, playlist, itemsToMap }) {
   const { images } = parsedReq
 
   const hasArtwork = hasArtworkImage(playlist.square_cover_480_url)
@@ -579,7 +579,7 @@ function Playlists({ parsedReq, playlist }) {
                 opacity: 0.9,
               }}
             >
-              {playlist.items.slice(0, 3).map((lesson) => (
+              {itemsToMap.map((lesson) => (
                 <img src={lesson.thumb_nail} width="460" key={lesson.id} />
               ))}
             </div>
@@ -740,9 +740,30 @@ export async function getHtml(parsedReq) {
       const playlist = await axios
         .get(`https://egghead.io/api/v1/playlists/${parsedReq.text}`)
         .then(({ data }) => data)
-      console.log('playlist: ', playlist)
+
+      let itemsToMap = []
+
+      const upperLevelLessons = playlist.items.filter(
+        ({ thumb_nail }) => !!thumb_nail,
+      )
+
+      const subPlaylists = playlist.items.filter(
+        (item) => item.type === 'playlist',
+      )
+
+      if (!isEmpty(upperLevelLessons)) {
+        itemsToMap = upperLevelLessons.slice(0, 3)
+      } else if (!isEmpty(subPlaylists)) {
+        const { data } = await axios.get(subPlaylists[0].items_url)
+        itemsToMap = data.slice(0, 3)
+      }
+
       markup = renderToStaticMarkup(
-        <Playlists playlist={playlist} parsedReq={parsedReq} />,
+        <Playlists
+          playlist={playlist}
+          parsedReq={parsedReq}
+          itemsToMap={itemsToMap}
+        />,
       )
       break
     case 'series':
