@@ -544,7 +544,6 @@ function Instructor({ parsedReq, instructor, palette }) {
 }
 
 function Playlists({ parsedReq, playlist, itemsToMap, palette, lessonsTotal }) {
-  console.log('Playlists -> palette', palette)
   const { images, theme } = parsedReq
 
   let background = 'white'
@@ -879,18 +878,14 @@ export async function getHtml(parsedReq) {
       }
 
       let subPlaylistsLessonsAmount = 0
-      let allDoneFn
-      const waitForList = new Promise((resolve) => (allDoneFn = resolve))
 
-      subPlaylists.forEach(async (item, index) => {
-        const { data } = await axios.get(item.items_url)
-        subPlaylistsLessonsAmount += data.length
-        if (index === subPlaylists.length - 1) {
-          allDoneFn()
-        }
-      })
-
-      await waitForList
+      const promises = subPlaylists.map(({ items_url }) =>
+        axios.get(items_url).then(({ data }) => data),
+      )
+      const results = await Promise.all(promises)
+      subPlaylistsLessonsAmount = results
+        .map((r) => r.filter(({ type }) => type === 'lesson').length)
+        .reduce((acc, cur) => acc + cur, 0)
 
       const lessonsTotal = upperLevelLessons.length + subPlaylistsLessonsAmount
 
