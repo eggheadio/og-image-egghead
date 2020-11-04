@@ -1,11 +1,11 @@
 /** @jsx jsx */
+import { readFileSync } from 'fs'
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import axios from 'axios'
 import { jsx, css, Global } from '@emotion/core'
 import { isEmpty, map, uniqBy } from 'lodash'
 import * as Vibrant from 'node-vibrant'
-import fonts from './fonts'
 import convertTime from './convertTime'
 import twemoji from 'twemoji'
 
@@ -14,9 +14,22 @@ const emojify = (text) => twemoji.parse(text, twOptions)
 const hasArtworkImage = (url) => {
   return !url.match(/\/tags\//)
 }
+const eggheadLogoSrc = readFileSync(`${__dirname}/egghead-logo.svg`).toString(
+  'base64',
+)
+const eggheadLogo = 'data:image/svg+xml;base64,' + eggheadLogoSrc
+
+const rglr = readFileSync(
+  `${__dirname}/../../_fonts/Inter-Regular.woff2`,
+).toString('base64')
 
 const reset = css`
-  ${fonts}
+  @font-face {
+    font-family: 'Inter';
+    font-style:  normal;
+    font-weight: normal;
+    src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
+}
   *,
   *:before,
   *:after {
@@ -28,8 +41,7 @@ const reset = css`
     padding: 0;
     margin: 0;
     color: #242529;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-      Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont;
   }
   html {
     text-rendering: optimizeLegibility;
@@ -531,41 +543,149 @@ function Instructor({ parsedReq, instructor, palette }) {
   )
 }
 
-function Playlists({ parsedReq, playlist, itemsToMap }) {
-  const { images } = parsedReq
+function Playlists({ parsedReq, playlist, itemsToMap, palette, lessonsTotal }) {
+  console.log('Playlists -> palette', palette)
+  const { images, theme } = parsedReq
+
+  let background = 'white'
+  let foreground = 'black'
+
+  if (theme === 'dark') {
+    background = 'black'
+    foreground = 'white'
+  }
 
   const hasArtwork = hasArtworkImage(playlist.square_cover_480_url)
 
   return (
     <React.Fragment>
       <Global styles={reset} />
-      <div
-        css={{
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-          height: '100%',
-        }}
-      >
+      {hasArtwork ? (
         <div
           css={{
-            width: '100%',
-            maxWidth: 460,
-            height: '100%',
-            display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            position: 'relative',
-            overflow: 'hidden',
-            backgroundColor: 'black',
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            height: '100%',
+            borderTop: `25px solid rgb(${palette.Vibrant.rgb.toString()})`,
+            padding: '0 3%',
+            background: background,
           }}
         >
-          {hasArtwork && (
-            <img src={playlist.square_cover_480_url} width="460" />
-          )}
-          {!hasArtwork && (
+          <div
+            css={{
+              display: 'flex',
+              flexShrink: 0,
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '38%',
+            }}
+          >
+            <img
+              src={playlist.square_cover_480_url}
+              css={{
+                display: 'block',
+                width: '100%',
+                maxWidth: '500px',
+              }}
+            />
+          </div>
+          <div
+            css={{
+              flexGrow: 1,
+              padding: '90px 0 90px 3%',
+            }}
+          >
+            <img
+              src={eggheadLogo}
+              css={{
+                width: '250px',
+                height: '62px',
+                marginBottom: '20px',
+              }}
+            />
+            <div
+              css={{
+                fontSize:
+                  playlist.title.length > 60
+                    ? playlist.title.length > 80
+                      ? '40px'
+                      : '44px'
+                    : '54px',
+                color: foreground,
+                fontWeight: 600,
+                fontStyle: 'normal',
+                lineHeight: 1.2,
+              }}
+            >
+              {emojify(playlist.title)}
+            </div>
+            <div
+              css={{
+                fontSize: '30px',
+                display: 'flex',
+                alignItems: 'center',
+                marginTop: '30px',
+              }}
+            >
+              {playlist.owner.avatar_url && (
+                <img
+                  src={
+                    playlist.owner.avatar_url.includes('gravatar')
+                      ? playlist.owner.avatar_url.replace('//', 'https://')
+                      : playlist.owner.avatar_url
+                  }
+                  css={{ borderRadius: '50%', width: '64px', height: '64px' }}
+                />
+              )}
+              {playlist.owner.full_name && (
+                <div
+                  css={{
+                    marginLeft: '16px',
+                    color: foreground,
+                    fontWeight: 600,
+                  }}
+                >
+                  {playlist.owner.full_name}
+                </div>
+              )}
+              <div
+                css={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginLeft: '30px',
+                }}
+              >
+                {lessonsTotal} video lessons
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div
+          css={{
+            alignItems: 'center',
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            height: '100%',
+          }}
+        >
+          <div
+            css={{
+              width: '100%',
+              maxWidth: 460,
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              position: 'relative',
+              overflow: 'hidden',
+              backgroundColor: 'black',
+            }}
+          >
             <div
               css={{
                 transform: 'rotateZ(15deg)',
@@ -583,116 +703,116 @@ function Playlists({ parsedReq, playlist, itemsToMap }) {
                 <img src={lesson.thumb_nail} width="460" key={lesson.id} />
               ))}
             </div>
-          )}
+            <div
+              css={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="95"
+                height="95"
+                viewBox="0 0 95 95"
+              >
+                <g fill="none" fillRule="evenodd">
+                  <circle
+                    cx="47.32"
+                    cy="47.32"
+                    r="46.32"
+                    fill="#FFF"
+                    stroke="#051721"
+                    strokeWidth="2"
+                  />
+                  <path
+                    fill="#252526"
+                    fillRule="nonzero"
+                    d="M40.0400015,60.361356 C40.0400015,61.764363 40.9808178,62.2925569 42.1559215,61.5316904 L59.1811153,50.5080682 C60.3497057,49.7514191 60.356219,48.5288657 59.1811153,47.7679992 L42.1559215,36.7443771 C40.9873312,35.987728 40.0400015,36.5221136 40.0400015,37.9147114 L40.0400015,60.361356 Z"
+                  />
+                </g>
+              </svg>
+            </div>
+          </div>
           <div
             css={{
-              position: 'absolute',
+              display: 'flex',
+              flexDirection: 'column',
+              // alignItems: 'center',
+              padding: 75,
               width: '100%',
-              height: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
             }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="95"
-              height="95"
-              viewBox="0 0 95 95"
+            <div
+              css={{
+                display: 'flex',
+                alignItems: 'center',
+              }}
             >
-              <g fill="none" fillRule="evenodd">
-                <circle
-                  cx="47.32"
-                  cy="47.32"
-                  r="46.32"
-                  fill="#FFF"
-                  stroke="#051721"
-                  strokeWidth="2"
-                />
-                <path
-                  fill="#252526"
-                  fillRule="nonzero"
-                  d="M40.0400015,60.361356 C40.0400015,61.764363 40.9808178,62.2925569 42.1559215,61.5316904 L59.1811153,50.5080682 C60.3497057,49.7514191 60.356219,48.5288657 59.1811153,47.7679992 L42.1559215,36.7443771 C40.9873312,35.987728 40.0400015,36.5221136 40.0400015,37.9147114 L40.0400015,60.361356 Z"
-                />
-              </g>
-            </svg>
-          </div>
-        </div>
-        <div
-          css={{
-            display: 'flex',
-            flexDirection: 'column',
-            // alignItems: 'center',
-            padding: 75,
-            width: '100%',
-          }}
-        >
-          <div
-            css={{
-              display: 'flex',
-              alignItems: 'center',
-            }}
-          >
-            <img src={images[0]} width="60px" />
-            <h2
-              css={{ fontSize: 34, marginLeft: 14, color: 'rgba(0,0,0,0.8)' }}
-            >
-              egghead.io
-            </h2>
-          </div>
+              <img src={images[0]} width="60px" />
+              <h2
+                css={{ fontSize: 34, marginLeft: 14, color: 'rgba(0,0,0,0.8)' }}
+              >
+                egghead.io
+              </h2>
+            </div>
 
-          <h1
-            css={{
-              fontWeight: 700,
-              padding: '56px 0',
-              color: 'rgba(0, 0, 0, 0.9)',
-              lineHeight: 1.2,
-              // fonSize: 58,
-              fontSize:
-                playlist.title.length > 30
-                  ? playlist.title.length > 45
-                    ? playlist.title.length > 55
-                      ? 48
-                      : 52
-                    : 56
-                  : 60,
-            }}
-          >
-            {emojify(playlist.title)}
-          </h1>
-          <h3
-            css={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              margin: '0 auto',
-              textAlign: 'center',
-            }}
-          >
-            Collection by{' '}
-            <span css={{ display: 'flex', alignItems: 'center' }}>
-              {playlist.owner.avatar_url && (
-                <img
-                  src={
-                    playlist.owner.avatar_url.includes('gravatar')
-                      ? playlist.owner.avatar_url.replace('//', 'https://')
-                      : playlist.owner.avatar_url
-                  }
-                  css={{ borderRadius: '50%', margin: '0 16px' }}
-                  width="56"
-                />
-              )}
-              {playlist.owner.full_name}
-            </span>
-          </h3>
-          <h3
-            css={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}
-          >
-            {playlist.items.length} video lessons,{' '}
-            {convertTime(playlist.duration)}
-          </h3>
+            <h1
+              css={{
+                fontWeight: 700,
+                padding: '56px 0',
+                color: 'rgba(0, 0, 0, 0.9)',
+                lineHeight: 1.2,
+                // fonSize: 58,
+                fontSize:
+                  playlist.title.length > 30
+                    ? playlist.title.length > 45
+                      ? playlist.title.length > 55
+                        ? 48
+                        : 52
+                      : 56
+                    : 60,
+              }}
+            >
+              {emojify(playlist.title)}
+            </h1>
+            <h3
+              css={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                margin: '0 auto',
+                textAlign: 'center',
+              }}
+            >
+              Collection by{' '}
+              <span css={{ display: 'flex', alignItems: 'center' }}>
+                {playlist.owner.avatar_url && (
+                  <img
+                    src={
+                      playlist.owner.avatar_url.includes('gravatar')
+                        ? playlist.owner.avatar_url.replace('//', 'https://')
+                        : playlist.owner.avatar_url
+                    }
+                    css={{ borderRadius: '50%', margin: '0 16px' }}
+                    width="56"
+                  />
+                )}
+                {playlist.owner.full_name}
+              </span>
+            </h3>
+            <h3
+              css={{ display: 'flex', alignItems: 'center', marginTop: '1rem' }}
+            >
+              {playlist.items.length} video lessons,{' '}
+              {convertTime(playlist.duration)}
+            </h3>
+          </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   )
 }
@@ -758,11 +878,33 @@ export async function getHtml(parsedReq) {
         itemsToMap = data.slice(0, 3)
       }
 
+      let subPlaylistsLessonsAmount = 0
+      let allDoneFn
+      const waitForList = new Promise((resolve) => (allDoneFn = resolve))
+
+      subPlaylists.forEach(async (item, index) => {
+        const { data } = await axios.get(item.items_url)
+        subPlaylistsLessonsAmount += data.length
+        if (index === subPlaylists.length - 1) {
+          allDoneFn()
+        }
+      })
+
+      await waitForList
+
+      const lessonsTotal = upperLevelLessons.length + subPlaylistsLessonsAmount
+
+      const playlistPalette = await Vibrant.from(playlist.square_cover_480_url)
+        .getPalette()
+        .then((palette) => palette)
+
       markup = renderToStaticMarkup(
         <Playlists
           playlist={playlist}
           parsedReq={parsedReq}
           itemsToMap={itemsToMap}
+          palette={playlistPalette}
+          lessonsTotal={lessonsTotal}
         />,
       )
       break
