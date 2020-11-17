@@ -8,28 +8,16 @@ import {isEmpty, map, uniqBy} from 'lodash'
 import * as Vibrant from 'node-vibrant'
 import convertTime from './convertTime'
 import twemoji from 'twemoji'
+import fonts from './fonts'
 
 const twOptions = {folder: 'svg', ext: '.svg'}
 const emojify = (text) => twemoji.parse(text, twOptions)
 const hasArtworkImage = (url) => {
   return !url.match(/\/tags\//)
 }
-// const eggheadLogoSrc = readFileSync(`${__dirname}/egghead-logo.svg`).toString(
-//   'base64',
-// )
-// const eggheadLogo = 'data:image/svg+xml;base64,' + eggheadLogoSrc
-
-const rglr = readFileSync(
-  `${__dirname}/../../_fonts/Inter-Regular.woff2`,
-).toString('base64')
 
 const reset = css`
-  @font-face {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: normal;
-    src: url(data:font/woff2;charset=utf-8;base64,${rglr}) format('woff2');
-  }
+  ${fonts}
   *,
   *:before,
   *:after {
