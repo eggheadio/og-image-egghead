@@ -14,10 +14,10 @@ const emojify = (text) => twemoji.parse(text, twOptions)
 const hasArtworkImage = (url) => {
   return !url.match(/\/tags\//)
 }
-const eggheadLogoSrc = readFileSync(`${__dirname}/egghead-logo.svg`).toString(
-  'base64',
-)
-const eggheadLogo = 'data:image/svg+xml;base64,' + eggheadLogoSrc
+// const eggheadLogoSrc = readFileSync(`${__dirname}/egghead-logo.svg`).toString(
+//   'base64',
+// )
+// const eggheadLogo = 'data:image/svg+xml;base64,' + eggheadLogoSrc
 
 const rglr = readFileSync(
   `${__dirname}/../../_fonts/Inter-Regular.woff2`,
@@ -597,7 +597,7 @@ function Playlists({ parsedReq, playlist, itemsToMap, palette, lessonsTotal }) {
             }}
           >
             <img
-              src={eggheadLogo}
+              src="https://res.cloudinary.com/dg3gyk0gu/image/upload/v1605643202/og-images/egghead-logo.svg"
               css={{
                 width: '250px',
                 height: '62px',
