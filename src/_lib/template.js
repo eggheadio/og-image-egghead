@@ -820,7 +820,7 @@ function Playlists({parsedReq, playlist, itemsToMap, palette, lessonsTotal}) {
                 textAlign: 'center',
               }}
             >
-              Collection by{' '}
+              Course by{' '}
               <span css={{display: 'flex', alignItems: 'center'}}>
                 {playlist.owner.avatar_url && (
                   <img
