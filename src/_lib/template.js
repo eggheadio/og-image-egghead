@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import {readFileSync} from 'fs'
 import React from 'react'
 import {renderToStaticMarkup} from 'react-dom/server'
 import axios from 'axios'
@@ -278,7 +277,6 @@ function Lesson({lesson, parsedReq, palette}) {
       >
         <div css={{marginRight: 50, width: '100%', maxWidth: 130}}>
           <img
-            // tag image
             src={lesson.image_256_url}
             css={{
               borderRadius: 10,
@@ -288,7 +286,6 @@ function Lesson({lesson, parsedReq, palette}) {
           />
         </div>
         <div
-          // right column holder
           css={{
             display: 'flex',
             flexDirection: 'column',
@@ -309,7 +306,6 @@ function Lesson({lesson, parsedReq, palette}) {
             egghead.io
           </div>
           <h1
-            // title
             css={{
               fontSize:
                 lesson.title.length > 30
@@ -327,7 +323,6 @@ function Lesson({lesson, parsedReq, palette}) {
             {lesson.title.replace(`’`, `'`)}
           </h1>
           <div
-            // byline holder
             css={{
               display: 'flex',
               alignItems: 'center',
@@ -340,7 +335,6 @@ function Lesson({lesson, parsedReq, palette}) {
             }}
           >
             <div
-              // instructor
               css={{marginRight: 36, display: 'flex', alignItems: 'center'}}
             >
               <img
@@ -355,7 +349,6 @@ function Lesson({lesson, parsedReq, palette}) {
               {emojify(lesson.instructor.full_name)}
             </div>
             <div
-              // duration
               css={{display: 'flex', alignItems: 'center', marginRight: 36}}
             >
               <svg
@@ -374,7 +367,6 @@ function Lesson({lesson, parsedReq, palette}) {
             </div>
             {lesson.free_forever && (
               <div
-                // community resource
                 css={{display: 'flex', alignItems: 'center'}}
               >
                 <svg
@@ -535,7 +527,6 @@ function Talk({talk, parsedReq}) {
               </span>
             </h3>
             <div
-            // byline holder
               css={{
                 display: 'flex',
                 alignItems: 'center',
@@ -548,7 +539,6 @@ function Talk({talk, parsedReq}) {
               }}
             >
               <div
-                // duration
                 css={{display: 'flex', alignItems: 'center', marginRight: 36}}
               >
                 <svg
@@ -567,7 +557,6 @@ function Talk({talk, parsedReq}) {
               </div>
               {talk.free_forever && (
                 <div
-                  // community resource
                   css={{display: 'flex', alignItems: 'center'}}
                 >
                   <svg
@@ -966,7 +955,6 @@ function Playlists({parsedReq, playlist, itemsToMap, palette, lessonsTotal}) {
             css={{
               display: 'flex',
               flexDirection: 'column',
-              // alignItems: 'center',
               padding: 75,
               width: '100%',
             }}
@@ -991,7 +979,6 @@ function Playlists({parsedReq, playlist, itemsToMap, palette, lessonsTotal}) {
                 padding: '56px 0',
                 color: 'rgba(0, 0, 0, 0.9)',
                 lineHeight: 1.2,
-                // fonSize: 58,
                 fontSize:
                   playlist.title.length > 30
                     ? playlist.title.length > 45
