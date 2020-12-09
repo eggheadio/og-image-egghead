@@ -5,7 +5,7 @@ export function parseRequest(req) {
   console.log('parsing request', req.url)
 
   const {pathname = '/', query = {}} = parse(req.url || '', true)
-  const {fontSize, images, widths, heights, theme, md, bgImage} = query
+  const {fontSize, images, widths, heights, theme, md, bgImage, author} = query
   let [type, slug] = compact(pathname.split('/'))
 
   if (type && !slug) {
@@ -45,10 +45,11 @@ export function parseRequest(req) {
     images: getArray(images),
     widths: getArray(widths),
     heights: getArray(heights),
+    author: author,
   }
   parsedRequest.images = getDefaultImages(
     parsedRequest.images,
-    parsedRequest.theme
+    parsedRequest.theme,
   )
   return parsedRequest
 }
@@ -62,7 +63,7 @@ function getDefaultImages(images, theme) {
     images.length > 0 &&
     images[0] &&
     images[0].startsWith(
-      'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198085/og-image-assets'
+      'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1567198085/og-image-assets',
     )
   ) {
     return images

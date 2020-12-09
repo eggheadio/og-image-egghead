@@ -189,6 +189,99 @@ function Store({parsedReq}) {
   )
 }
 
+function Article({parsedReq}) {
+  const {text, images, bgImage, author, resourceType} = parsedReq
+  console.log('PARSED REQUEST', parsedReq)
+  return (
+    <React.Fragment>
+      <Global styles={reset} />
+      <div
+        css={{
+          display: 'flex',
+          justifyContent: 'flex-start',
+          alignItems: 'flex-end',
+          padding: '50px 80px',
+          height: '100%',
+          backgroundImage: `url(${
+            !isEmpty(bgImage)
+              ? bgImage
+              : 'https://res.cloudinary.com/dg3gyk0gu/image/upload/v1571300217/og-image-assets/instructor-guide_2x.png'
+          })`,
+          // backgroundSize: '1200px 628px',
+          // backgroundRepeat: 'no-repeat',
+          // backgroundPosition: '50% 50%',
+          backgroundSize: 'cover',
+        }}
+      >
+        <div
+          css={{
+            position: 'absolute',
+            zIndex: 10,
+            left: 60,
+            top: 60,
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <img src={images[0]} width="70px" />
+          <h3 css={{marginLeft: 20}}>egghead.io</h3>
+        </div>
+        <div
+          css={{
+            zIndex: 5,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            padding: '80px 60px',
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            height: '100%',
+            width: '45%',
+          }}
+        >
+          <h1
+            css={{
+              color: 'black',
+              fontSize: '54px',
+              fontWeight: '900',
+              lineHeight: 1.25,
+              padding: '10px 0',
+            }}
+          >
+            {text}
+          </h1>
+          {author && (
+            <h2
+              css={{
+                color: 'black',
+                fontSize: '32px',
+                fontWeight: '400',
+                lineHeight: 1.25,
+                padding: '10px 0',
+              }}
+            >
+              by {author}
+            </h2>
+          )}
+        </div>
+        <div
+          css={{
+            position: 'absolute',
+            left: -60,
+            top: 0,
+            height: '100%',
+            width: '50%',
+            background: 'rgba(255, 255, 255, 1)',
+            // backdropFilter: 'blur(10px)',
+            transform: 'skewX(-10deg)',
+          }}
+        />
+      </div>
+    </React.Fragment>
+  )
+}
+
 function Podcast({parsedReq, podcast, palette}) {
   const {images} = parsedReq
   const vibrant = `rgba(${palette.Vibrant._rgb.toString()}, 1)`
@@ -989,6 +1082,9 @@ export async function getHtml(parsedReq) {
       break
     case 'store':
       markup = renderToStaticMarkup(<Store parsedReq={parsedReq} />)
+      break
+    case 'article':
+      markup = renderToStaticMarkup(<Article parsedReq={parsedReq} />)
       break
     case 'podcast':
       const podcast = await axios

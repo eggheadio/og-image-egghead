@@ -28,7 +28,8 @@ function parseRequest(req) {
       heights = query.heights,
       theme = query.theme,
       md = query.md,
-      bgImage = query.bgImage;
+      bgImage = query.bgImage,
+      author = query.author;
 
   var _compact = (0, _compact3["default"])(pathname.split('/')),
       _compact2 = (0, _slicedToArray2["default"])(_compact, 2),
@@ -73,7 +74,8 @@ function parseRequest(req) {
     bgImage: bgImage,
     images: getArray(images),
     widths: getArray(widths),
-    heights: getArray(heights)
+    heights: getArray(heights),
+    author: author
   };
   parsedRequest.images = getDefaultImages(parsedRequest.images, parsedRequest.theme);
   return parsedRequest;
