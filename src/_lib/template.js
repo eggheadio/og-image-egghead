@@ -190,7 +190,7 @@ function Store({parsedReq}) {
 }
 
 function Article({parsedReq}) {
-  const {text, images, bgImage, author, resourceType} = parsedReq
+  const {text, images, bgImage, author, state, resourceType} = parsedReq
   console.log('PARSED REQUEST', parsedReq)
   return (
     <React.Fragment>
@@ -240,6 +240,25 @@ function Article({parsedReq}) {
             width: '45%',
           }}
         >
+          {state && (
+            <div
+              css={{
+                fontSize: 24,
+                marginBottom: 8,
+                lineHeight: 1,
+                padding: 10,
+                display: 'inline-block',
+                alignSelf: 'start',
+                background: 'rgb(253, 246, 178)',
+                borderRadius: 10,
+                color: 'black',
+                fontWeight: 800,
+                textTransform: 'capitalize',
+              }}
+            >
+              {state}
+            </div>
+          )}
           <h1
             css={{
               color: 'black',
