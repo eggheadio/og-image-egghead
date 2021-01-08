@@ -520,31 +520,20 @@ function Talk({lesson, parsedReq, palette}) {
       <Global styles={reset} />
       <div
         css={{
-          padding: 50,
           display: 'flex',
           alignItems: 'center',
           width: '100%',
           height: '100%',
-          borderTop: `25px solid ${vibrant}`,
+          // borderTop: `25px solid ${vibrant}`,
         }}
       >
-        <div css={{marginRight: 50, width: '100%', maxWidth: 130}}>
-          <img
-            src={lesson.instructor.avatar_256_url}
-            css={{
-              borderRadius: '50%',
-              width: '100%',
-              maxWidth: 130,
-            }}
-          />{' '}
-        </div>
         <div
-          // right column holder
           css={{
             display: 'flex',
             flexDirection: 'column',
             height: '100%',
             justifyContent: 'center',
+            padding: 50,
           }}
         >
           <div
@@ -575,7 +564,7 @@ function Talk({lesson, parsedReq, palette}) {
               marginBottom: 30,
             }}
           >
-            {lesson.title.replace(`’`, `'`)}
+            {lesson.title.replace(`’`, `'`).replace(`egghead Talks:`, ``)}
           </h1>
           <div
             // byline holder
@@ -614,28 +603,19 @@ function Talk({lesson, parsedReq, palette}) {
               </svg>{' '}
               {convertTime(lesson.duration)}
             </div>
-            {lesson.free_forever && (
-              <div
-                // community resource
-                css={{display: 'flex', alignItems: 'center'}}
-              >
-                <svg
-                  css={{marginRight: 10}}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="42"
-                  height="38"
-                  viewBox="0 0 42 38"
-                >
-                  <g fill="#FFB430">
-                    <path d="M38.64,15.54 L32.34,15.54 C31.052,12.488 28,10.36 24.472,10.36 C19.768,10.36 15.932,14.168 15.932,18.844 C15.932,23.52 19.768,27.328 24.472,27.328 C28,27.328 31.024,25.2 32.312,22.176 L38.64,22.176 C40.488,22.176 42,20.692 42,18.844 C42,17.052 40.488,15.54 38.64,15.54 Z M24.472,22.148 C22.652,22.148 21.168,20.692 21.168,18.872 C21.168,17.052 22.652,15.596 24.472,15.596 C26.292,15.596 27.776,17.052 27.776,18.872 C27.776,20.692 26.292,22.148 24.472,22.148 Z" />
-                    <path d="M37.912,31.192 L32.984,26.656 C32.62,26.32 32.088,26.348 31.752,26.684 C29.596,28.728 26.6,29.932 23.324,29.652 C18.032,29.232 13.776,24.92 13.412,19.656 C12.964,13.384 17.976,8.12 24.22,8.12 C26.964,8.12 29.456,9.128 31.388,10.808 C31.724,11.116 32.256,11.116 32.592,10.808 L37.604,6.216 C37.8,6.02 37.828,5.712 37.632,5.516 C33.964,1.876 28.84,-0.28 23.212,0.028 C14.364,0.476 7.056,7.056 5.516,15.54 L3.36,15.54 C1.512,15.54 0,17.052 0,18.9 C0,20.748 1.512,22.26 3.36,22.26 L5.516,22.26 C7.112,31.08 14.868,37.8 24.22,37.8 C29.624,37.8 34.468,35.56 37.94,31.976 C38.136,31.752 38.136,31.416 37.912,31.192 Z" />
-                  </g>
-                </svg>{' '}
-                Community Resource
-              </div>
-            )}
           </div>
         </div>
+
+        <div
+          css={{
+            width: '80%',
+            height: '100%',
+            backgroundImage: `url(${lesson.instructor.avatar_480_url})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+          }}
+        />
       </div>
     </React.Fragment>
   )
