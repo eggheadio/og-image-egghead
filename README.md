@@ -9,6 +9,9 @@
 
 ## Examples
 
+### Talk
+<a href="https://og-image-react-egghead.now.sh/talk/egghead-egghead-talks-learning-tips-every-developer-should-know"><img src="https://og-image-react-egghead.now.sh/talk/egghead-egghead-talks-learning-tips-every-developer-should-know" width="350"></a>
+
 ### Instructor
 <a href="https://og-image-react-egghead.now.sh/instructor/john-lindquist"><img src="https://og-image-react-egghead.now.sh/instructor/john-lindquist" width="350"></a>
 
