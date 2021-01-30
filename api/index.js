@@ -28,14 +28,14 @@ function handler(_x, _x2) {
 
 function _handler() {
   _handler = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-    var parsedReq, text, fileType, resourceType, html, filePath, fileUrl, file;
+    var parsedReq, text, fileType, resourceType, orientation, html, filePath, fileUrl, file;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             _context.prev = 0;
             parsedReq = (0, _parser.parseRequest)(req);
-            text = parsedReq.text, fileType = parsedReq.fileType, resourceType = parsedReq.resourceType;
+            text = parsedReq.text, fileType = parsedReq.fileType, resourceType = parsedReq.resourceType, orientation = parsedReq.orientation;
             _context.next = 5;
             return (0, _template.getHtml)(parsedReq);
 
@@ -60,7 +60,7 @@ function _handler() {
             filePath = _context.sent;
             fileUrl = (0, _file.pathToFileURL)(filePath);
             _context.next = 17;
-            return (0, _chromium.getScreenshot)(fileUrl, fileType, isDev);
+            return (0, _chromium.getScreenshot)(fileUrl, fileType, isDev, orientation);
 
           case 17:
             file = _context.sent;

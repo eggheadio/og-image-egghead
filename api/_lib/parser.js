@@ -30,7 +30,9 @@ function parseRequest(req) {
       md = query.md,
       bgImage = query.bgImage,
       author = query.author,
-      state = query.state;
+      state = query.state,
+      _query$orientation = query.orientation,
+      orientation = _query$orientation === void 0 ? 'landscape' : _query$orientation;
 
   var _compact = (0, _compact3["default"])(pathname.split('/')),
       _compact2 = (0, _slicedToArray2["default"])(_compact, 2),
@@ -77,7 +79,8 @@ function parseRequest(req) {
     widths: getArray(widths),
     heights: getArray(heights),
     author: author,
-    state: state
+    state: state,
+    orientation: orientation
   };
   parsedRequest.images = getDefaultImages(parsedRequest.images, parsedRequest.theme);
   return parsedRequest;

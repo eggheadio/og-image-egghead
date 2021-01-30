@@ -63,6 +63,26 @@ function App({resource, parsedReq}) {
   )
 }
 
+function Topic({parsedReq, topic, palette}) {
+    console.log(parsedReq)
+
+    return (
+        <React.Fragment>
+        <Global styles={reset} />
+        <div  css={{
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            width: '100%',
+            height: '100%',
+            backgroundImage: `linear-gradient(rgb(${palette.LightVibrant.rgb.toString()}), rgb(${palette.DarkMuted.rgb.toString()}))`,
+            padding: '0 3%',
+        }}><img css={{height: '300px', width: 'auto', filter: `drop-shadow(2px 2px 2px rgb(${palette.DarkVibrant.rgb.toString()}))`}} src={topic.image_480_url} /></div>
+    </React.Fragment>
+    )
+}
+
 function InstructorGuide({parsedReq}) {
   const {
     text,
@@ -621,6 +641,8 @@ function Talk({lesson, parsedReq, palette}) {
   )
 }
 
+
+
 function Instructor({parsedReq, instructor, palette}) {
   const {images} = parsedReq
   const vibrant = `rgba(${palette.Vibrant._rgb.toString()}, 1)`
@@ -1076,6 +1098,17 @@ export async function getHtml(parsedReq) {
 
   console.log(parsedReq)
   switch (parsedReq.resourceType) {
+      case 'topic':
+          const topic = await axios
+              .get(`https://app.egghead.io/api/v1/tags/${parsedReq.text}`)
+              .then(({data}) => data)
+          const topicPalette = await Vibrant.from(topic.image_480_url)
+              .getPalette()
+              .then((palette) => palette)
+          markup = renderToStaticMarkup(
+              <Topic topic={topic} palette={topicPalette} parsedReq={parsedReq} />,
+          )
+          break
     case 'instructor-guide':
       markup = renderToStaticMarkup(<InstructorGuide parsedReq={parsedReq} />)
       break
@@ -1087,7 +1120,7 @@ export async function getHtml(parsedReq) {
       break
     case 'podcast':
       const podcast = await axios
-        .get(`https://egghead.io/api/v1/podcasts/${parsedReq.text}`)
+        .get(`https://app.egghead.io/api/v1/podcasts/${parsedReq.text}`)
         .then(({data}) => data)
       const palette = await Vibrant.from(podcast.image_url)
         .getPalette()
@@ -1099,7 +1132,7 @@ export async function getHtml(parsedReq) {
       break
     case 'instructor':
       const instructor = await axios
-        .get(`https://egghead.io/api/v1/instructors/${parsedReq.text}`)
+        .get(`https://app.egghead.io/api/v1/instructors/${parsedReq.text}`)
         .then(({data}) => data)
       const avatarPalette = await Vibrant.from(instructor.avatar_256_url)
         .getPalette()
@@ -1115,7 +1148,7 @@ export async function getHtml(parsedReq) {
       break
     case 'playlists':
       const playlist = await axios
-        .get(`https://egghead.io/api/v1/playlists/${parsedReq.text}`)
+        .get(`https://app.egghead.io/api/v1/playlists/${parsedReq.text}`)
         .then(({data}) => data)
 
       let itemsToMap = []
@@ -1164,7 +1197,7 @@ export async function getHtml(parsedReq) {
     case 'series':
       const resource = await axios
         .get(
-          `https://egghead.io/api/v1/${parsedReq.resourceType}/${parsedReq.text}`,
+          `https://app.egghead.io/api/v1/${parsedReq.resourceType}/${parsedReq.text}`,
         )
         .then(({data}) => data)
       markup = renderToStaticMarkup(
@@ -1173,7 +1206,7 @@ export async function getHtml(parsedReq) {
       break
     case 'lesson':
       const lesson = await axios
-        .get(`https://egghead.io/api/v1/lessons/${parsedReq.text}`)
+        .get(`https://app.egghead.io/api/v1/lessons/${parsedReq.text}`)
         .then(({data}) => data)
       const tagPalette = await Vibrant.from(lesson.image_256_url)
         .getPalette()
@@ -1184,7 +1217,7 @@ export async function getHtml(parsedReq) {
       break
     case 'talk':
       const talk = await axios
-        .get(`https://egghead.io/api/v1/lessons/${parsedReq.text}`)
+        .get(`https://app.egghead.io/api/v1/lessons/${parsedReq.text}`)
         .then(({data}) => data)
       const talkPalette = await Vibrant.from(talk.instructor.avatar_256_url)
         .getPalette()

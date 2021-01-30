@@ -9,7 +9,7 @@ const isHtmlDebug = process.env.OG_HTML_DEBUG === '1'
 export default async function handler(req, res) {
   try {
     const parsedReq = parseRequest(req)
-    const {text, fileType, resourceType} = parsedReq
+    const {text, fileType, resourceType, orientation} = parsedReq
 
     const html = await getHtml(parsedReq)
 
@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     const filePath = await writeTempFile(text, html)
     const fileUrl = pathToFileURL(filePath)
-    const file = await getScreenshot(fileUrl, fileType, isDev)
+    const file = await getScreenshot(fileUrl, fileType, isDev, orientation)
 
     res.statusCode = 200
     res.setHeader('Content-Type', `image/${fileType}`)

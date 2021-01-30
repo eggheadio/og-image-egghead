@@ -15,6 +15,7 @@ export function parseRequest(req) {
     bgImage,
     author,
     state,
+    orientation = 'landscape'
   } = query
   let [type, slug] = compact(pathname.split('/'))
 
@@ -57,6 +58,7 @@ export function parseRequest(req) {
     heights: getArray(heights),
     author: author,
     state: state,
+    orientation
   }
   parsedRequest.images = getDefaultImages(
     parsedRequest.images,

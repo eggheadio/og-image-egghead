@@ -63,54 +63,58 @@ function _getPage() {
   return _getPage.apply(this, arguments);
 }
 
-function getScreenshot(_x2, _x3, _x4) {
+function getScreenshot(_x2, _x3, _x4, _x5) {
   return _getScreenshot.apply(this, arguments);
 }
 
 function _getScreenshot() {
-  _getScreenshot = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(url, type, isDev) {
-    var page, response, file;
+  _getScreenshot = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(url, type, isDev, orientation) {
+    var dimensions, page, response, file;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.next = 2;
-            return getPage(isDev);
-
-          case 2:
-            page = _context2.sent;
-            _context2.next = 5;
-            return page.setViewport({
+            dimensions = orientation === 'landscape' ? {
               width: 1200,
               height: 628
-            });
+            } : {
+              width: 628,
+              height: 1200
+            };
+            _context2.next = 3;
+            return getPage(isDev);
 
-          case 5:
-            _context2.next = 7;
+          case 3:
+            page = _context2.sent;
+            _context2.next = 6;
+            return page.setViewport(dimensions);
+
+          case 6:
+            _context2.next = 8;
             return page["goto"](url);
 
-          case 7:
+          case 8:
             response = _context2.sent;
             _context2.t0 = page;
-            _context2.next = 11;
+            _context2.next = 12;
             return response.buffer();
 
-          case 11:
+          case 12:
             _context2.t1 = _context2.sent.toString('utf8');
-            _context2.next = 14;
+            _context2.next = 15;
             return _context2.t0.setContent.call(_context2.t0, _context2.t1);
 
-          case 14:
-            _context2.next = 16;
+          case 15:
+            _context2.next = 17;
             return page.screenshot({
               type: type
             });
 
-          case 16:
+          case 17:
             file = _context2.sent;
             return _context2.abrupt("return", file);
 
-          case 18:
+          case 19:
           case "end":
             return _context2.stop();
         }

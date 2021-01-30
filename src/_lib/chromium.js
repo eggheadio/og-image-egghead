@@ -12,9 +12,10 @@ async function getPage(isDev) {
   return _page
 }
 
-export async function getScreenshot(url, type, isDev) {
+export async function getScreenshot(url, type, isDev, orientation) {
+  const dimensions = orientation === 'landscape' ? {width: 1200, height: 628} : {width: 628, height: 1200}
   const page = await getPage(isDev)
-  await page.setViewport({width: 1200, height: 628})
+  await page.setViewport(dimensions)
   const response = await page.goto(url)
   await page.setContent((await response.buffer()).toString('utf8'))
   const file = await page.screenshot({type})
