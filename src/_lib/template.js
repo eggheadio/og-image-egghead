@@ -76,9 +76,9 @@ function Topic({parsedReq, topic, palette}) {
             justifyContent: 'center',
             width: '100%',
             height: '100%',
-            backgroundImage: `linear-gradient(rgb(${palette.LightVibrant.rgb.toString()}), rgb(${palette.DarkMuted.rgb.toString()}))`,
+            backgroundImage: `linear-gradient(rgb(${palette.LightVibrant.rgb.toString()}), rgb(${palette.Vibrant.rgb.toString()}))`,
             padding: '0 3%',
-        }}><img css={{height: '300px', width: 'auto', filter: `drop-shadow(2px 2px 2px rgb(${palette.DarkVibrant.rgb.toString()}))`}} src={topic.image_480_url} /></div>
+        }}><img css={{height: '300px', width: 'auto', filter: `drop-shadow(5px 7px 12px rgb(${palette.DarkVibrant.rgb.toString()}))`}} src={topic.image_480_url} /></div>
     </React.Fragment>
     )
 }
