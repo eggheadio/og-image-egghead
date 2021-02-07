@@ -64,23 +64,34 @@ function App({resource, parsedReq}) {
 }
 
 function Topic({parsedReq, topic, palette}) {
-    console.log(parsedReq)
+  console.log(parsedReq)
 
-    return (
-        <React.Fragment>
-        <Global styles={reset} />
-        <div  css={{
-            alignItems: 'center',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            width: '100%',
-            height: '100%',
-            backgroundImage: `linear-gradient(rgb(${palette.LightVibrant.rgb.toString()}), rgb(${palette.Vibrant.rgb.toString()}))`,
-            padding: '0 3%',
-        }}><img css={{height: '300px', width: 'auto', filter: `drop-shadow(5px 7px 12px rgb(${palette.DarkVibrant.rgb.toString()}))`}} src={topic.image_480_url} /></div>
+  return (
+    <React.Fragment>
+      <Global styles={reset} />
+      <div
+        css={{
+          alignItems: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          backgroundImage: `linear-gradient(rgb(${palette.LightVibrant.rgb.toString()}), rgb(${palette.Vibrant.rgb.toString()}))`,
+          padding: '0 3%',
+        }}
+      >
+        <img
+          css={{
+            height: '300px',
+            width: 'auto',
+            filter: `drop-shadow(5px 7px 12px rgb(${palette.DarkVibrant.rgb.toString()}))`,
+          }}
+          src={topic.image_480_url}
+        />
+      </div>
     </React.Fragment>
-    )
+  )
 }
 
 function InstructorGuide({parsedReq}) {
@@ -210,8 +221,10 @@ function Store({parsedReq}) {
 }
 
 function Article({parsedReq}) {
-  const {text, images, bgImage, author, state, resourceType} = parsedReq
+  const {text, images, bgImage, author, state, resourceType, theme} = parsedReq
   console.log('PARSED REQUEST', parsedReq)
+  const color = theme === 'dark' ? 'white' : 'black'
+  const backgroundColor = theme === 'dark' ? '#111827' : 'white'
   return (
     <React.Fragment>
       <Global styles={reset} />
@@ -222,6 +235,7 @@ function Article({parsedReq}) {
           alignItems: 'flex-end',
           padding: '50px 80px',
           height: '100%',
+          color,
           backgroundImage: `url(${
             !isEmpty(bgImage)
               ? bgImage
@@ -271,7 +285,7 @@ function Article({parsedReq}) {
                 alignSelf: 'start',
                 background: 'rgb(253, 246, 178)',
                 borderRadius: 10,
-                color: 'black',
+                color,
                 fontWeight: 800,
                 textTransform: 'capitalize',
               }}
@@ -281,7 +295,7 @@ function Article({parsedReq}) {
           )}
           <h1
             css={{
-              color: 'black',
+              color,
               fontSize: '54px',
               fontWeight: '900',
               lineHeight: 1.25,
@@ -293,7 +307,7 @@ function Article({parsedReq}) {
           {author && (
             <h2
               css={{
-                color: 'black',
+                color,
                 fontSize: '32px',
                 fontWeight: '400',
                 lineHeight: 1.25,
@@ -311,7 +325,7 @@ function Article({parsedReq}) {
             top: 0,
             height: '100%',
             width: '50%',
-            background: 'rgba(255, 255, 255, 1)',
+            backgroundColor,
             // backdropFilter: 'blur(10px)',
             transform: 'skewX(-10deg)',
           }}
@@ -640,8 +654,6 @@ function Talk({lesson, parsedReq, palette}) {
     </React.Fragment>
   )
 }
-
-
 
 function Instructor({parsedReq, instructor, palette}) {
   const {images} = parsedReq
@@ -1098,17 +1110,17 @@ export async function getHtml(parsedReq) {
 
   console.log(parsedReq)
   switch (parsedReq.resourceType) {
-      case 'topic':
-          const topic = await axios
-              .get(`https://app.egghead.io/api/v1/tags/${parsedReq.text}`)
-              .then(({data}) => data)
-          const topicPalette = await Vibrant.from(topic.image_480_url)
-              .getPalette()
-              .then((palette) => palette)
-          markup = renderToStaticMarkup(
-              <Topic topic={topic} palette={topicPalette} parsedReq={parsedReq} />,
-          )
-          break
+    case 'topic':
+      const topic = await axios
+        .get(`https://app.egghead.io/api/v1/tags/${parsedReq.text}`)
+        .then(({data}) => data)
+      const topicPalette = await Vibrant.from(topic.image_480_url)
+        .getPalette()
+        .then((palette) => palette)
+      markup = renderToStaticMarkup(
+        <Topic topic={topic} palette={topicPalette} parsedReq={parsedReq} />,
+      )
+      break
     case 'instructor-guide':
       markup = renderToStaticMarkup(<InstructorGuide parsedReq={parsedReq} />)
       break
