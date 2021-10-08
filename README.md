@@ -9,6 +9,9 @@
 
 ## Examples
 
+### Course
+<a href="https://og-image-react-egghead.vercel.app/playlists/build-advanced-components-with-react-hooks-810906cc"><img src="https://og-image-react-egghead.vercel.app/playlists/build-advanced-components-with-react-hooks-810906cc" width="350"></a>
+
 ### Talk
 <a href="https://og-image-react-egghead.now.sh/talk/egghead-egghead-talks-learning-tips-every-developer-should-know"><img src="https://og-image-react-egghead.now.sh/talk/egghead-egghead-talks-learning-tips-every-developer-should-know" width="350"></a>
 
